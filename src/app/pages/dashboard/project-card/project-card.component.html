@@ -1,0 +1,27 @@
+<div class="card" *ngIf="project.name != ''">
+  <div class="flex-col">
+    <div #thumbnail class="thumbnail">
+      <div class="coming-soon" *ngIf="thumbnailUrl == ''">Coming Soon</div>
+    </div>
+    <div class="p-name">{{ project.name }}</div>
+    <p class="p-description">{{ desc }}</p>
+    <p class="date" *ngIf="project.dateCompleted != ''">
+      Completed - {{completionDate}}
+    </p>
+  </div>
+
+  <div class="button-container">
+    <button class="button btn-edit" (click)="onEditProject()">Edit</button>
+    <button class="button btn-delete" (click)="onDeleteProject()">Delete</button>
+  </div>
+</div>
+
+
+<div class="card add-project-card" *ngIf="project.name == ''" (click)="onAddProject()">
+  <div class="flex-col centre">
+    <div class="centre-circle">
+      <div class="plus-symbol"></div>
+    </div>
+  </div>
+</div>
+

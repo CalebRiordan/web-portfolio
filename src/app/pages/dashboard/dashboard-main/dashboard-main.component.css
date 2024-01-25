@@ -1,0 +1,134 @@
+.login-page{
+    height: auto;
+    background-color: green;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.LS-font{
+    font-family: 'Poppins', 'Segoe UI', 'Verdana', sans-serif; 
+}
+
+.background-panel{
+    padding-top: var(--header-height);
+    width: 100%;
+    height: auto;
+}
+
+.projects-editor-section{
+    position: relative;
+    background-color: red;
+    width: 100%;
+    height: 680px;
+    background-color: rgb(var(--secondary-colour));
+    padding: 40px 60px;
+    box-sizing: border-box;
+}
+
+.flex-row {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    height: auto;
+    gap: calc((100% - 4*(400px)) / 4);
+}
+
+.align-center{
+    justify-content: center;
+}
+
+.api-call-failed{
+    width: 800px;
+    text-align: center;
+    margin-top: 100px;
+    font-size: 40px;
+    color: firebrick;
+    box-sizing: border-box;
+    padding: 0;
+    overflow: hidden;
+}
+
+.messages-section{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    height: auto;
+    min-height: calc(100vh - var(--header-height) - 680px);
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.heading {
+    position: relative;
+    margin: 20px 0; 
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.messages-table{
+    width: 90%;
+    height: auto;
+    color: rgb(var(--text-colour));
+    border: 1px solid white;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+}
+
+.messages-table thead {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.messages-table td {
+    padding: 5px 10px;
+}
+
+tbody td{
+    font-size: 20px;
+}
+
+.td-name {
+    width: 15%;
+}
+
+.td-email {
+    width: 18%;
+}
+
+.td-message {
+    width: 60%;
+}
+
+.td-delete{
+    width: 7%;
+}
+
+.delete-button{
+    font-size: 20px;
+    border-color: firebrick;
+}
+
+.delete-button:hover{
+    background-color: firebrick;
+}
+
+.api-failed{
+    font-size: 40px;
+    color: firebrick;
+    margin-bottom: 40px;
+}
+
+.no-messages{
+    font-size: 40px;
+    color: rgb(var(--text-colour));
+    margin-bottom: 40px;
+}

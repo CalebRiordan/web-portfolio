@@ -1,0 +1,54 @@
+<div #projectDisplay class="project-display">
+  <div class="project-item-container" *ngIf="projOdd || isMobileScreen">
+    <div class="thumbnail">
+      <div class="coming-soon" *ngIf="thumbnailUrl == ''">Coming Soon</div>
+      <div class="before-1" [class.in-view]="inView"></div>
+      <div class="before-2" [class.in-view]="inView"></div>
+    </div>
+    <div #thumbnail class="thumbnail-background"></div>
+  </div>
+
+  <div
+    class="project-item-container"
+    [ngClass]="{
+      'slide-in': inView,
+      'inactive-right': projOdd,
+      'inactive-left': !projOdd
+    }"
+  >
+    <div class="description">
+      <h1>{{ projectData.name }}</h1>
+      <div class="content">
+        {{ projectData.description }}
+      </div>
+      <p *ngIf="projectData.dateCompleted != ''">
+        Completed - {{completionDate}}
+      </p>
+      <div class="button-container">
+        <button
+          class="button"
+          appRippleEffect
+          [disabled]="projectData.dateCompleted == ''"
+        >
+          GitHub
+        </button>
+        <button
+          class="button"
+          appRippleEffect
+          [disabled]="projectData.dateCompleted == ''"
+        >
+          Demo
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-item-container" *ngIf="!projOdd && !isMobileScreen">
+    <div class="thumbnail">
+      <div class="coming-soon" *ngIf="thumbnailUrl == ''">Coming Soon</div>
+      <div class="before-1" [class.in-view]="inView"></div>
+      <div class="before-2" [class.in-view]="inView"></div>
+    </div>
+    <div #thumbnail class="thumbnail-background"></div>
+  </div>
+</div>

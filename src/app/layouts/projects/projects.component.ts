@@ -1,0 +1,61 @@
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { Project, emptyProject } from 'src/app/models/project';
+import { ProjectsService } from 'src/app/services/projects.service';
+import { ScrollService } from 'src/app/services/scroll-service.service';
+
+@Component({
+  selector: 'app-projects',
+  templateUrl: './projects.component.html',
+  styleUrls: ['./projects.component.css'],
+})
+export class ProjectsComponent implements OnInit, AfterViewInit {
+  showFillerLine: boolean = false;
+  projects: Project[] = [emptyProject, emptyProject, emptyProject, emptyProject];
+
+  @ViewChild('projectsContainer') projContainer!: ElementRef;
+
+  @HostListener('window:scroll', ['$event']) onScrollIntoSection(event: Event) {
+    const projContainerRect =
+      this.projContainer.nativeElement.getBoundingClientRect();
+
+    if (projContainerRect.top <= window.innerHeight * 0.55 - 300) {
+      // see if the distance between the top of the screen and the bottom of first project container is less than the height of the line-filler
+      this.showFillerLine = true;
+    } else {
+      this.showFillerLine = false;
+    }
+  }
+
+  constructor(private scrollService: ScrollService, private projService: ProjectsService){
+    this.projService.getProjects().subscribe(res => {
+      if (res){
+        //Map values of API Project model to local Project model
+        this.projects = res.map(apiProject => this.projService.convertApiToLocalProject(apiProject));
+      }
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.scrollService.scrollIntoView(this.projContainer).subscribe(isInView => {
+        if (isInView){
+          document.documentElement.style.scrollSnapType = 'Y mandatory';
+        } else {
+          document.documentElement.style.scrollSnapType = 'Y proximity';
+        }      
+      }
+    )
+  }
+
+  ngOnInit(): void {
+    
+    
+  }
+
+}

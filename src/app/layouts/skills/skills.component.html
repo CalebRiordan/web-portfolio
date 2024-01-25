@@ -1,0 +1,79 @@
+<div id="skills" class="skills-section scroll-offset">
+  <div class="heading">Skills</div>
+  <div class="skills">
+    <div class="skills-container">
+      <div class="skill" (click)="navigateToWebsite('angular')">
+        <img
+          class="logo"
+          src="assets/logos/Angular_Gray.png"
+          alt="Angular logo"
+        />
+        <p>Angular</p>
+      </div>
+
+      <div class="skill" (click)="navigateToWebsite('aspnet')">
+        <div class="image">
+          <img
+            class="logo wider"
+            src="assets/logos/ASPNET_Gray.png"
+            alt="Angular logo"
+          />
+        </div>
+        <p>ASP.NET</p>
+      </div>
+
+      <div class="skill" (click)="navigateToWebsite('csharp')">
+        <div class="image">
+          <img
+            class="logo"
+            src="assets/logos/CSharp_Gray.png"
+            alt="Angular logo"
+          />
+        </div>
+        <p>C#</p>
+      </div>
+    </div>
+
+    <div class="skills-container">
+      <div class="skill" (click)="navigateToWebsite('html')">
+        <div class="image">
+          <img
+            class="logo"
+            src="assets/logos/HTML_Gray.png"
+            alt="Angular logo"
+          />
+        </div>
+        <p>HTML</p>
+      </div>
+
+      <div class="skill" (click)="navigateToWebsite('css')">
+        <div class="image css-image">
+          <img
+            class="logo"
+            src="assets/logos/CSS_Gray.png"
+            alt="Angular logo"
+          />
+        </div>
+        <p>CSS</p>
+      </div>
+
+      <div class="skill" (click)="navigateToWebsite('mysql')">
+        <div class="image">
+          <img
+            class="logo wider"
+            src="assets/logos/MySQL_Gray.png"
+            alt="Angular logo"
+          />
+        </div>
+        <p>MySQL</p>
+      </div>
+    </div>
+  </div>
+  <div>
+      <button class="button CV-button" appRippleEffect (click)="openCV()">See CV</button>
+  </div>
+
+  <div class="container-relative">
+    <div #gradient class="primary-secondary-gradient"></div>
+  </div>
+</div>

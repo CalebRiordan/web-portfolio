@@ -1,0 +1,38 @@
+<div class="login-page LS-font">
+  <app-navbar [forPage]="'dashboard'"></app-navbar>
+  <div class="background-panel">
+
+    <div id="projects-editor" class="projects-editor-section">
+      <div class="flex-row" [ngClass]="{'align-center': fetchProjectsApiFailed}">
+        <div class="api-failed" *ngIf="fetchProjectsApiFailed">Failed to get projects from API :/</div>
+        <app-project-card *ngFor="let project of projects, index as i" [project]="project" [projNum]="i + 1"></app-project-card>
+      </div>
+    </div>
+
+    <div id="messages" class="messages-section">
+      <div class="heading">Messages</div>
+      <div class="api-failed" *ngIf="fetchProjectsApiFailed">Failed to get messages from API :/</div>
+      <div class="no-messages" *ngIf="noMessages">No Messages</div>
+      <table class="messages-table" *ngIf="!noMessages && !fetchMessagesApiFailed">
+        <thead>
+          <tr>
+            <td class="td-name">Name</td>
+            <td class="td-email">Email</td>
+            <td class="td-message">Message</td>
+            <td class="td-delete"></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let message of messages">
+            <td class="td-name">{{message.name}}</td>
+            <td class="td-email">{{message.emailAddress}}</td>
+            <td class="td-message">{{message.content}}</td>
+            <td class="td-delete">
+              <button class="button delete-button" (click)="onDeleteMessage(message.id, message.name)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

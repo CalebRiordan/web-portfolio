@@ -1,0 +1,99 @@
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
+import { Project } from 'src/app/models/project';
+
+@Component({
+  selector: 'app-featured-project',
+  templateUrl: './featured-project.component.html',
+  styleUrls: ['./featured-project.component.css'],
+})
+export class FeaturedProjectComponent implements OnInit, AfterViewInit {
+  inView: boolean = false;
+  projOdd: Boolean = false;
+  projectData!: Project;
+  projNum!: number;
+  thumbnailUrl!: string;
+  completionDate!: string;
+
+  winWidth: any;
+  isMobileScreen!: boolean;
+
+  @Input() projInfo!: any[];
+  @ViewChild('projectDisplay') content!: ElementRef;
+  @ViewChild('thumbnail') thumbnail!: ElementRef;
+
+  @HostListener('window:scroll', ['$event']) onScrollIntoView(event: Event) {
+    // check if content is in view and update 'inView' variable
+    const windowHeight = window.innerHeight;
+    const elementRect = this.content.nativeElement.getBoundingClientRect();
+
+    const elementInView = elementRect.bottom <= windowHeight;
+
+    if (elementInView) {
+      this.inView = true;
+    } else {
+      this.inView = false;
+    }
+  }
+
+  @HostListener('window:resize', ['$event']) onWindowResize() {
+    this.winWidth = window.innerWidth;
+    this.winWidth <= 820
+      ? (this.isMobileScreen = true)
+      : (this.isMobileScreen = false);
+  }
+
+  constructor(private renderer: Renderer2) {}
+
+  ngOnInit(): void {
+    this.projNum = this.projInfo[0];
+    this.projectData = this.projInfo[1];
+    if (this.projectData.name == ''){
+      //Project has not been planned yet
+      this.projectData.name = 'Future Project';
+      this.projectData.description = 'This project has not been planned yet. Please visit my web page in the future to view my progress!';
+    }
+    this.thumbnailUrl = this.projectData.thumbnailUrl;
+
+    if (this.projectData.dateCompleted != ''){
+      this.completionDate = this.formatDate(this.projectData.dateCompleted);
+    }
+
+    this.projOdd = this.projNum % 2 == 1;
+    this.winWidth = window.innerWidth;
+    this.winWidth <= 820
+      ? (this.isMobileScreen = true)
+      : (this.isMobileScreen = false);
+  }
+
+  ngAfterViewInit(): void {
+    if (this.thumbnailUrl != '') {
+      this.renderer.setStyle(
+        this.thumbnail.nativeElement,
+        'background-image',
+        `url(${this.thumbnailUrl})`
+      );
+      this.renderer.setStyle(this.thumbnail.nativeElement, 'content', '');
+    }
+  }
+
+  formatDate(inputDate: string): string{
+    const dateObject = new Date(inputDate);
+
+    const formattedDate = dateObject.toLocaleDateString('en-US', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric'
+    });
+
+    return formattedDate;
+  }
+}

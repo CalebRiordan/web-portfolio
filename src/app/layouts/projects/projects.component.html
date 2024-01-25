@@ -1,0 +1,46 @@
+<div id="projects" class="projects-section scroll-offset">
+  <div #lineFiller class="line-filler" *ngIf="showFillerLine"></div>
+
+  <div class="container-relative">
+    <div class="heading">Projects</div>
+  </div>
+
+  <div #projectsContainer class="projects-container">
+
+
+    <div class="project">
+      <app-featured-project [projInfo]="[1, projects[0]]"></app-featured-project>
+
+      <div class="line-panels">
+        <div class="short-left"></div>
+        <div class="long-right"></div>
+      </div>
+    </div> <!-- end project 1 -->
+
+
+
+    <div class="project">
+      <app-featured-project [projInfo]="[2, projects[1]]"></app-featured-project>
+
+      <div class="line-panels">
+        <div class="long-left"></div>
+        <div class="short-right"></div>
+      </div>
+    </div> <!-- end project 2 -->
+
+    <div class="project">
+      <app-featured-project [projInfo]="[3, projects[2]]"></app-featured-project>
+
+      <div class="line-panels">
+        <div class="short-left"></div>
+        <div class="long-right"></div>
+      </div>
+    </div> <!-- end project 3 -->
+
+    <div class="project">
+      <app-featured-project [projInfo]="[4, projects[3]]"></app-featured-project>
+    </div> <!-- end project 4 -->
+
+
+  </div>
+</div>

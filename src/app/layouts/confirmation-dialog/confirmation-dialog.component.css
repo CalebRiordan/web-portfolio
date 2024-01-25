@@ -1,0 +1,30 @@
+.mat-dialog-title{
+    font-size: 38px;
+    color: rgb(var(--text-colour));
+    box-sizing: border-box;
+    margin: 20px
+}
+
+.mat-dialog-content {
+    font-size: 30px;
+    color: rgb(var(--text-colour));
+    box-sizing: border-box;
+    margin: 20px 15px;
+    margin-top: 0;
+    line-height: normal;
+}
+
+mat-dialog-actions{
+    margin: 25px 15px;
+    padding: 0 24px;
+}
+
+.button{
+    /* width: 100px;
+    height: 70px; */
+    margin-right: 20px;
+}
+
+.dialog-background{
+    background-color: rgb(var(--primary-colour));
+}

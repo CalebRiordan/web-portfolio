@@ -1,0 +1,72 @@
+<div class="about-me-section scroll-offset">
+  <div class="recipe-image-grid">
+    <div class="recipe">
+      <div id="about-me" class="recipe-title">
+        CALEB'S <span class="text-delicious">DELICIOUS</span><br /><span
+          style="font-style: italic"
+          >WEB PORTFOLIO</span
+        >
+      </div>
+      <div class="underline"></div>
+      <br />
+      <div class="ingredient">500g <span class="highlight">C#</span></div>
+      <div class="ingredient">
+        2 cups <span class="highlight">Typescript</span>
+      </div>
+      <div class="ingredient">3 tbsp <span class="highlight">HTML</span></div>
+      <div class="ingredient">
+        2 tbsp <span class="highlight">Angular</span>, routing included
+      </div>
+      <div class="ingredient">200ml <span class="highlight">SQL</span></div>
+      <div class="ingredient"><span class="highlight">CSS</span> to taste</div>
+      <div class="ingredient">
+        <span class="highlight">Firebase</span>, for serving
+      </div>
+    </div>
+
+    <div class="cauldron-image">
+      <img
+        src="../../../assets/images/enlarge_cauldron_orange.png"
+        alt="Cauldron Brewing Code"
+      />
+    </div>
+  </div>
+
+  <div #introduction class="introduction">
+    <div></div>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 320 512"
+      class="frame-corner-left"
+      [ngClass]="inView ? 'fadeToRight' : 'hidden-left'"
+    >
+      <path
+        d="M64 32c17.7 0 32 14.3 32 32V416H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H64c-17.7 0-32-14.3-32-32V64c0-17.7 14.3-32 32-32z"
+      />
+    </svg>
+    <div class="content" [ngClass]="inView ? 'active' : 'inactive'">
+      <h1>
+        Hi!
+        <br />
+        My name is Caleb Riordan,
+      </h1>
+      <p>
+        a passionate first year software engineering student. I love the gratification that comes with solving a good challenge and bringing my ideas to life through code.
+      </p>
+      <br />
+      <p>So I created this little web page to show you!</p>
+    </div>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 320 512"
+      class="frame-corner-right"
+      [ngClass]="inView ? 'fadeToLeft' : 'hidden-right'"
+    >
+      <path
+        d="M64 32c17.7 0 32 14.3 32 32V416H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H64c-17.7 0-32-14.3-32-32V64c0-17.7 14.3-32 32-32z"
+      />
+    </svg>
+  </div>
+
+  <app-skills></app-skills>
+</div>

@@ -1,0 +1,100 @@
+<div class="background-panel LS-font">
+  <div class="back-button" [routerLink]="['/admin/dashboard']"> <- Back </div>
+  <div class="editor-panel">
+    <div class="heading">{{pagePurpose | titlecase}} Project</div>
+    <form [formGroup]="editProjectForm" (ngSubmit)="onSubmit()">
+      <div class="grid-layout" [ngClass]="{'form-processing': formProcessing}">
+        <div class="col-1">
+          <div class="flex" [ngClass]="{'form-processing': formProcessing}">
+            <label for="imageArea">
+              <img
+                [src]="imgSrc"
+                class="thumbnail"
+                [ngClass]="{
+                  'is-invalid': fc['thumbnail'].touched && project.thumbnailUrl
+                }"
+              />
+              <input
+                id="imageArea"
+                type="file"
+                class="image-selector"
+                accept="image/*"
+                formControlName="thumbnail"
+                (change)="onImageSelected($event)"
+              />
+              <div class="add-thumbnail" *ngIf="imgSrc.length == 0">Add Project Thumbnail</div>
+            </label>
+          </div>
+          <div class="control-group">
+            <label for="ghLinkField">GitHub Link</label>
+            <input
+              id="ghLinkField"
+              class="field"
+              type="text"
+              [value]="fcv('githubLink')"
+              formControlName="githubLink"
+              [ngClass]="{'form-processing': formProcessing}"
+              [ngClass]="{
+                'is-invalid':
+                  fc['githubLink'].touched && fc['githubLink'].invalid
+              }"
+            />
+          </div>
+
+          <div class="control-group">
+            <label for="demoLinkField">Live Demo Link</label>
+            <input
+              id="demoLinkField"
+              class="field"
+              type="text"
+              [value]="fcv('demoLink')"
+              formControlName="demoLink"
+              [ngClass]="{
+                'is-invalid': fc['demoLink'].touched && fc['demoLink'].invalid
+              }"
+            />
+          </div>
+        </div>
+
+        <div class="col-2">
+          <div class="control-group name-group">
+            <label for="nameField">Project Name</label>
+            <input
+              id="nameField"
+              class="field name-field"
+              type="text"
+              [value]="fcv('name')"
+              formControlName="name"
+              [ngClass]="{
+                'is-invalid': fc['name'].touched && fc['name'].invalid
+              }"
+            />
+          </div>
+
+          <div class="control-group description-group">
+            <label for="descField">Project Description</label>
+            <textarea
+              id="descField"
+              class="field desc-field"
+              [value]="fcv('description')"
+              formControlName="description"
+              type="'text"
+              [ngClass]="{
+                'is-invalid':
+                  fc['description'].touched && fc['description'].invalid
+              }"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="button"
+        [disabled]="editProjectForm.invalid"
+        appRippleEffect
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+.home{
+    padding-top: var(--header-height);
+    height: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.LS-font{
+    font-family: 'Poppins', 'Segoe UI', 'Verdana', sans-serif; 
+}

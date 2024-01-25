@@ -1,0 +1,162 @@
+.background-panel{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(var(--secondary-colour));
+}
+
+.LS-font{
+    font-family: 'Poppins', 'Segoe UI', 'Verdana', sans-serif; 
+}
+
+.back-button{
+    position: absolute;
+    font-size: 28px;
+    font-weight: 700;
+    top: 20px;
+    left: 20px;
+    width: 130px;
+    height: 55px;
+    color: rgb(var(--text-colour)); 
+    background-color: rgb(var(--primary-colour));
+    text-align: center;
+    padding: 6px 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid white
+}
+
+.editor-panel{
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    background-color: rgb(var(--primary-colour));
+    padding: 0px 60px 60px 60px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+form{
+    height: 85%;
+}
+
+.grid-layout{
+    text-align: left;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    height: 90%;
+    margin-top: 10px;
+}
+
+.flex{
+    width: 92%;
+    margin-bottom: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.thumbnail{
+    width: 95%;
+    aspect-ratio: 9 / 5;
+    color: #0B0D0F;
+    font-weight: 700;
+    font-size: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #2D363F;
+
+    border: solid 3px rgb(var(--highlight-colour));
+    border-radius: 20px;
+    box-sizing: border-box;
+
+    background-size: cover;
+    cursor: pointer;
+}
+
+.add-thumbnail{
+    position: absolute;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    color: black;
+    font-size: 34px;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.image-selector{
+    display: none;
+}
+
+.control-group{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 17%;
+    justify-content: space-between;
+}
+
+label{
+    font-size: 36px;
+    color: rgb(var(--text-colour));
+    font-weight: 700;
+}
+
+.field{
+    background-color: transparent;
+    border: 2px solid rgb(var(--highlight-colour));
+    border-radius: 20px;
+    width: 85%;
+    height: 54px;
+    box-sizing: border-box;
+    font-size: 24px;
+    color: rgb(var(--text-colour));
+    padding: 5px 10px
+}
+
+.name-group{
+    height: 20%;
+}
+
+.name-field{
+    font-size: 36px;
+    height: 74px;
+    font-weight: 700;
+}
+
+.description-group{
+    height: 69%;
+}
+
+.desc-field{
+    height: 86%;
+    padding: 20px 15px;
+    font-size: 28px;
+}
+
+.button {
+    position: relative;
+    height: 80px;
+    font-size: 40px;
+    width: 80%;
+    margin: 10px 10% 20px 10%;
+    box-sizing: border-box;
+}
+
+.is-invalid{
+    border: 2px solid rgb(220, 53, 69);
+}
+
+.form-processing .field, .form-processing .thumbnail {
+    border-color: grey;
+}
+
+.form-processing {
+    border-color: grey;
+    color: grey;
+}

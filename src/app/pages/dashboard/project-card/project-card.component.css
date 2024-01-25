@@ -1,0 +1,146 @@
+.card{
+    width: 400px;
+    height: 600px;
+    background-color: rgb(var(--primary-colour));
+    border: solid 3px #2D363F;
+    border-radius: 25px;
+    padding: 20px;
+    box-sizing: border-box;
+
+    position: relative;
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+}
+
+.flex-col.centre{
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.thumbnail {
+    width: 100%;
+    aspect-ratio: 9 / 5;
+    color: #0B0D0F;
+    font-weight: 700;
+    font-size: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #2D363F;
+
+    border: solid 3px rgb(var(--highlight-colour));
+    border-radius: 20px;
+    box-sizing: border-box;
+
+    background-size: cover;
+}
+
+.coming-soon {
+    position: absolute;
+    z-index: 2;
+    color: black;
+}
+
+.p-name {
+    font-size: 36px;
+    font-weight: 500;
+    padding-top: 20px;
+    color: rgb(var(--text-colour));
+}
+
+.p-description{
+    font-size: 24px;
+    padding-top: 10px;
+    color: rgb(var(--text-colour));
+    margin-bottom: 0;
+}
+
+.date{
+    font-size: 20px;
+    padding-top: 10px;
+    color: rgb(var(--text-colour))  ;
+}
+
+.button-container{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: calc(100% - 40px);
+    height: auto;
+    margin-bottom: 20px;
+    justify-content: center;
+    gap: 10%;
+}
+
+.button{
+    font-size: 28px;
+    padding: 3px;
+}
+
+.btn-edit{
+    border-color: darkcyan;
+}
+
+.btn-delete{
+    border-color:firebrick;
+}
+
+.btn-edit:hover{
+    background-color: darkcyan;
+}
+
+.btn-delete:hover{
+    background-color:firebrick;
+}
+
+.add-project-card{
+    cursor: pointer;
+    transition: box-shadow 0.1s ease;
+}
+
+.add-project-card:hover{
+    box-shadow: 4px 4px 8px rgba(var(--highlight-colour), 0.5);
+}
+
+.centre-circle{
+    width: 48%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    border: 6px solid grey;
+}
+
+.plus-symbol{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.plus-symbol::before{
+    content: "";
+    width: 50%;
+    height: 6px;
+    background-color: grey;
+    display: block;
+    border-radius: 4px;
+    position: absolute;
+}
+
+.plus-symbol::after{
+    content: "";
+    height: 50%;
+    width: 6px;
+    background-color: grey;
+    display: block;
+    border-radius: 4px;
+    position: absolute;
+}

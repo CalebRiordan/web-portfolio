@@ -1,0 +1,80 @@
+.footer {
+    background-color: rgb(var(--primary-colour));
+    height: var(--header-height);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    box-shadow: 0 20px;
+    border-bottom: 4px solid rgba(0, 0, 0, 0.2);
+
+    scroll-snap-align: bottom;
+}
+
+.flex-row-nav {
+    width: 60%;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-row-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 13%;
+}
+
+.c-name {
+   color: rgb(var(--text-colour));
+    opacity: 0.6;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.icon {
+    display: inline;
+}
+
+.linkedin-icon{
+    margin-right: 10%;
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 1400px) {
+
+    .flex-row-nav {
+        width: 70%;
+    }
+
+    .flex-row-icons {
+        width: 17%;
+    }
+
+}
+
+@media only screen and (max-width: 820px) {
+
+    .c-name{
+        font-size: 18px;
+    }
+
+    .icon{
+        width: 27px;
+        height: 27px;
+    }
+
+    .flex-row-nav {
+        width: 80%;
+    }
+
+    .flex-row-icons {
+        width: 22%;
+    }
+
+}
