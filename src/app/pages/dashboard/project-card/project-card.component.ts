@@ -10,7 +10,7 @@ import {
 import { Router } from '@angular/router';
 import { Project } from 'src/app/models/project';
 import { DataService } from 'src/app/services/data.service';
-import { MatDialog } from '@angular/material/dialog'
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/layouts/confirmation-dialog/confirmation-dialog.component';
 import { Observable } from 'rxjs';
 import { ProjectsService } from 'src/app/services/projects.service';
@@ -39,11 +39,12 @@ export class ProjectCardComponent implements OnInit, AfterViewInit {
     private router: Router,
     private dataService: DataService,
     private dialog: MatDialog,
-    private sbService: SnackbarService) {}
+    private sbService: SnackbarService
+  ) {}
 
   ngOnInit(): void {
     this.thumbnailUrl = this.project.thumbnailUrl;
-    this.completionDate = this.formatDate(this.project.dateCompleted);    
+    this.completionDate = this.formatDate(this.project.dateCompleted);
     this.desc = this.truncateDescription(this.project.description);
   }
 
@@ -57,7 +58,7 @@ export class ProjectCardComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onAddProject(){
+  onAddProject() {
     this.router.navigate(['admin/edit-project'], {
       queryParams: { purpose: 'add', projNum: this.projNum },
     });
@@ -72,50 +73,50 @@ export class ProjectCardComponent implements OnInit, AfterViewInit {
   }
 
   onDeleteProject() {
-    this.openConfirmationDialog().subscribe(result => {
-      if (result){
-        //'Yes' 
-        this.projService.deleteProject(this.projNum).subscribe(res => {
-          if (res.status == 200){
+    this.openConfirmationDialog().subscribe((result) => {
+      if (result) {
+        //'Yes'
+        this.projService.deleteProject(this.projNum).subscribe((res) => {
+          if (res.status == 200) {
             window.location.reload();
-            this.sbService.generateSnackbar("Project deleted!");
+            this.sbService.generateSnackbar('Project deleted!');
           }
-        }
-        );
+        });
       }
     });
   }
 
   openConfirmationDialog(): Observable<any> {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      panelClass: "dialog-background",
+      panelClass: 'dialog-background',
       width: '700px',
       height: '300px',
-      data: { message: `Are you sure you want to delete project ${this.projNum}?` }
+      data: {
+        message: `Are you sure you want to delete project ${this.projNum}?`,
+      },
     });
 
     return dialogRef.afterClosed();
   }
 
   //Convert date from string 'yyyy-MM-dd' to 'dd MMM yyyy'
-  formatDate(inputDate: string): string{
+  formatDate(inputDate: string): string {
     const dateObject = new Date(inputDate);
 
     const formattedDate = dateObject.toLocaleDateString('en-US', {
       day: '2-digit',
       month: 'short',
-      year: 'numeric'
+      year: 'numeric',
     });
 
     return formattedDate;
   }
 
-  truncateDescription(desc: string){
-    if (desc.length > 120){
-      desc = desc.substring(0, 120) + "..."
+  truncateDescription(desc: string) {
+    if (desc.length > 120) {
+      desc = desc.substring(0, 120) + '...';
       return desc;
-    } 
+    }
     return desc;
   }
-
 }

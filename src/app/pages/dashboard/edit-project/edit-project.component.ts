@@ -71,7 +71,7 @@ export class EditProjectComponent implements OnInit {
   setupForm() {
     this.editProjectForm = this.fb.group({
       name: ["", [Validators.required, Validators.maxLength(25)]],
-      description: ["", [Validators.required, Validators.maxLength(190)]],
+      description: ["", [Validators.required, Validators.maxLength(185)]],
       thumbnail: [""],
       githubLink: [""],
       demoLink: [""],

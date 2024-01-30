@@ -183,22 +183,22 @@
     }
 
     .project-item-container {
-        width: 70%;
+        width: 75%;
         height: 158px;
         margin: 0 auto;
         padding: 0;
     }
 
     .project-info-container{
-        height: 190px;
+        height: 220px;
     }
 
     .project-info-container.condense{
-        height: 148px;
+        height: 158px;
     }
 
     .coming-soon{
-        font-size: 24px;
+        font-size: 28px;
     }
 
     .description h1 {
@@ -208,16 +208,17 @@
     }
 
     .description .content {
-        font-size: 14px;
+        font-size: 16px;
         margin-bottom: 5px;
     }
 
     .description p {
-        font-size: 12px;
+        margin-top: 10px;
+        font-size: 14px;
     }
 
     .button {
         width: 5em;
-        font-size: 14px;
+        font-size: 16px;
     }
 }

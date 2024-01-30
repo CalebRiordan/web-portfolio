@@ -1,11 +1,14 @@
 <div class="background-panel LS-font">
-  <div class="back-button" [routerLink]="['/admin/dashboard']"> <- Back </div>
+  <div class="back-button" [routerLink]="['/admin/dashboard']"><- Back</div>
   <div class="editor-panel">
-    <div class="heading">{{pagePurpose | titlecase}} Project</div>
+    <div class="heading">{{ pagePurpose | titlecase }} Project</div>
     <form [formGroup]="editProjectForm" (ngSubmit)="onSubmit()">
-      <div class="grid-layout" [ngClass]="{'form-processing': formProcessing}">
+      <div
+        class="grid-layout"
+        [ngClass]="{ 'form-processing': formProcessing }"
+      >
         <div class="col-1">
-          <div class="flex" [ngClass]="{'form-processing': formProcessing}">
+          <div class="flex" [ngClass]="{ 'form-processing': formProcessing }">
             <label for="imageArea">
               <img
                 [src]="imgSrc"
@@ -22,7 +25,9 @@
                 formControlName="thumbnail"
                 (change)="onImageSelected($event)"
               />
-              <div class="add-thumbnail" *ngIf="imgSrc.length == 0">Add Project Thumbnail</div>
+              <div class="add-thumbnail" *ngIf="imgSrc.length == 0">
+                Add Project Thumbnail
+              </div>
             </label>
           </div>
           <div class="control-group">
@@ -33,7 +38,7 @@
               type="text"
               [value]="fcv('githubLink')"
               formControlName="githubLink"
-              [ngClass]="{'form-processing': formProcessing}"
+              [ngClass]="{ 'form-processing': formProcessing }"
               [ngClass]="{
                 'is-invalid':
                   fc['githubLink'].touched && fc['githubLink'].invalid
@@ -85,11 +90,11 @@
               }"
             ></textarea>
             <div
-            class="input-invalid-textarea"
-            *ngIf="fc['description'].errors?.['maxlength'] && fc['description'].touched"
+              class="input-invalid-textarea"
+              *ngIf="fc['description'].errors?.['maxlength'] && fc['description'].touched"
             >
-            The description cannot exceed 190 characters
-          </div>
+              The description cannot exceed 185 characters
+            </div>
           </div>
         </div>
       </div>
