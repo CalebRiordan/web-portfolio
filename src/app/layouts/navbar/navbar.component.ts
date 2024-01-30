@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,10 +11,14 @@ export class NavbarComponent implements OnInit{
   sidePanelActive: boolean = false;
   showProfileIcon: boolean = false;
   signOutDropdownActive: boolean = false;
+  sigImg!: string;
+  baseSigImgPath: string = "/assets/logos/";
 
   @Input() forPage!: string;
 
-  constructor(private auth: AuthService){}
+  constructor(private auth: AuthService, private themeService: ThemeService){
+    this.themeService.isDarkMode ? this.sigImg = `${this.baseSigImgPath}sig_white.png` : this.sigImg = `${this.baseSigImgPath}sig_darkblue.png`    
+  }
 
   ngOnInit(): void {
     if (this.forPage == "dashboard" && this.auth.isLoggedIn == true){
@@ -31,6 +36,11 @@ export class NavbarComponent implements OnInit{
 
   onSignoutClick(){
     if (this.auth.isLoggedIn) this.auth.logOut();
+  }
+
+  onToggleLightMode(){
+    this.themeService.toggleTheme();   
+    this.themeService.isDarkMode ? this.sigImg = `${this.baseSigImgPath}sig_white.png` : this.sigImg = `${this.baseSigImgPath}sig_darkblue.png`
   }
 
 }

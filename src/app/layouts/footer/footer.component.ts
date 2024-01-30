@@ -13,8 +13,7 @@ export class FooterComponent {
   };
 
   navigateToWebsite(profile: string){
-    window.open(this.profiles[profile], '_blank');
-    console.log('clickeddddd');    
+    window.open(this.profiles[profile], '_blank'); 
   }
 
 }

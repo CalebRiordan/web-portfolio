@@ -30,7 +30,7 @@
 .inner-card {
     width: 80%;
     height: 78%;
-    border: 5px solid white;
+    border: 5px solid rgb(var(--text-colour));
     margin: 0 auto;
     border-radius: 40px;
 }

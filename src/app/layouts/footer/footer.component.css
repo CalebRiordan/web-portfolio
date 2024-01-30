@@ -38,6 +38,7 @@
 
 .icon {
     display: inline;
+    fill: rgb(var(--text-colour));
 }
 
 .linkedin-icon{
