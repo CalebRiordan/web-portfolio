@@ -9,11 +9,12 @@
   </div>
 
   <div
-    class="project-item-container"
+    class="project-item-container project-info-container"
     [ngClass]="{
       'slide-in': inView,
       'inactive-right': projOdd,
-      'inactive-left': !projOdd
+      'inactive-left': !projOdd,
+      'condense': projectData.dateCompleted == ''
     }"
   >
     <div class="description">
@@ -26,16 +27,20 @@
       </p>
       <div class="button-container">
         <button
-          class="button"
           appRippleEffect
-          [disabled]="projectData.dateCompleted == ''"
+          class="button"
+          [attr.title]="projectData.demoLink == '' ? 'GitHub repository unavailable' : null"
+          [disabled]="projectData.githubLink == ''"
+          (click)="onOpenRepo()"
         >
           GitHub
         </button>
         <button
-          class="button"
           appRippleEffect
-          [disabled]="projectData.dateCompleted == ''"
+          class="button"
+          [attr.title]="projectData.demoLink == '' ? 'Demo unavailable' : null"
+          [disabled]="projectData.demoLink == ''"
+          (click)="onOpenDemo()"
         >
           Demo
         </button>

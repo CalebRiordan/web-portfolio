@@ -84,6 +84,12 @@
                   fc['description'].touched && fc['description'].invalid
               }"
             ></textarea>
+            <div
+            class="input-invalid-textarea"
+            *ngIf="fc['description'].errors?.['maxlength'] && fc['description'].touched"
+            >
+            The description cannot exceed 190 characters
+          </div>
           </div>
         </div>
       </div>

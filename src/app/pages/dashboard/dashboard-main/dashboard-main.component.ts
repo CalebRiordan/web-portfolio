@@ -33,7 +33,7 @@ export class DashboardMainComponent implements OnInit{
       next: (res) => {
         //Map values of API Project model to local Project model
         this.projects = res.map(apiProject => this.projService.convertApiToLocalProject(apiProject));
-
+        
         if (this.projects.length < 4){
           this.projects = [...this.projects, emptyProject];
         }

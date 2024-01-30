@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
@@ -33,7 +34,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  constructor(private scrollService: ScrollService, private projService: ProjectsService){
+  constructor(private scrollService: ScrollService, private projService: ProjectsService, private ref: ChangeDetectorRef){
     this.projService.getProjects().subscribe(res => {
       if (res){
         //Map values of API Project model to local Project model
@@ -50,7 +51,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
           document.documentElement.style.scrollSnapType = 'Y proximity';
         }      
       }
-    )
+    );
   }
 
   ngOnInit(): void {

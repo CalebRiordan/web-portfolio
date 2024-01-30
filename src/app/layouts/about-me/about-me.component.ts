@@ -23,8 +23,6 @@ export class AboutMeComponent {
       elementCenterY <= windowHeight && elementCenterY >= 0;
     const elementLeavesViewport = (elementRect.top + 300) >= windowHeight || (elementRect.bottom -300) <= 0; 
       //check that content (introduction container - padding) is completely outside of viewport
-
-    // console.log(`Top: ${elementRect.top}, Bottom: ${elementRect.bottom}, windowHeight: ${windowHeight}`);
     
     if (elementInViewport) {  //depending on position of viewport, use [ngClass] to add or remove classes to manipulate which CSS is applied
       this.inView = true;

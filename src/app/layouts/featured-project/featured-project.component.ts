@@ -1,26 +1,27 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   HostListener,
   Input,
+  OnChanges,
   OnInit,
   Renderer2,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { Project } from 'src/app/models/project';
+import { Project, emptyProject } from 'src/app/models/project';
 
 @Component({
   selector: 'app-featured-project',
   templateUrl: './featured-project.component.html',
   styleUrls: ['./featured-project.component.css'],
 })
-export class FeaturedProjectComponent implements OnInit, AfterViewInit {
+export class FeaturedProjectComponent implements OnInit, OnChanges {
   inView: boolean = false;
   projOdd: Boolean = false;
   projectData!: Project;
   projNum!: number;
-  thumbnailUrl!: string;
+  thumbnailUrl: string = '';
   completionDate!: string;
 
   winWidth: any;
@@ -55,16 +56,13 @@ export class FeaturedProjectComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.projNum = this.projInfo[0];
-    this.projectData = this.projInfo[1];
-    if (this.projectData.name == ''){
+    this.projectData = emptyProject;
+
+    if (this.projectData.name == '') {
       //Project has not been planned yet
       this.projectData.name = 'Future Project';
-      this.projectData.description = 'This project has not been planned yet. Please visit my web page in the future to view my progress!';
-    }
-    this.thumbnailUrl = this.projectData.thumbnailUrl;
-
-    if (this.projectData.dateCompleted != ''){
-      this.completionDate = this.formatDate(this.projectData.dateCompleted);
+      this.projectData.description =
+        'This project has not been planned yet. Please visit my web page in the future to view my progress!';
     }
 
     this.projOdd = this.projNum % 2 == 1;
@@ -74,26 +72,50 @@ export class FeaturedProjectComponent implements OnInit, AfterViewInit {
       : (this.isMobileScreen = false);
   }
 
-  ngAfterViewInit(): void {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['projInfo']) {
+      if (this.projInfo[1] == undefined) {
+        this.projectData = emptyProject;
+      } else {
+        this.projectData = this.projInfo[1];
+        if (this.projectData.dateCompleted != '') {
+          this.completionDate = this.formatDate(this.projectData.dateCompleted);
+          this.thumbnailUrl = this.projectData.thumbnailUrl;
+          this.updateThumbnail();
+        }
+      }
+    }
+  }
+
+  updateThumbnail() {
     if (this.thumbnailUrl != '') {
       this.renderer.setStyle(
         this.thumbnail.nativeElement,
         'background-image',
         `url(${this.thumbnailUrl})`
       );
-      this.renderer.setStyle(this.thumbnail.nativeElement, 'content', '');
     }
   }
 
-  formatDate(inputDate: string): string{
-    const dateObject = new Date(inputDate);
+  formatDate(inputDate: string): string {
+    if (inputDate != '') {
+      const dateObject = new Date(inputDate);
 
-    const formattedDate = dateObject.toLocaleDateString('en-US', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric'
-    });
+      const formattedDate = dateObject.toLocaleDateString('en-US', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+      });
 
-    return formattedDate;
+      return formattedDate;
+    } else return '';
+  }
+
+  onOpenRepo() {
+    window.open(this.projectData.githubLink, '_blank');
+  }
+
+  onOpenDemo() {
+    window.open(this.projectData.demoLink, '_blank');
   }
 }

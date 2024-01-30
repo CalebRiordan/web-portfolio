@@ -54,7 +54,6 @@ export class ProjectCardComponent implements OnInit, AfterViewInit {
         'background-image',
         `url(${this.thumbnailUrl})`
       );
-      this.renderer.setStyle(this.thumbnail.nativeElement, 'content', '');
     }
   }
 
@@ -112,7 +111,7 @@ export class ProjectCardComponent implements OnInit, AfterViewInit {
   }
 
   truncateDescription(desc: string){
-    if (desc.length > 200){
+    if (desc.length > 120){
       desc = desc.substring(0, 120) + "..."
       return desc;
     } 

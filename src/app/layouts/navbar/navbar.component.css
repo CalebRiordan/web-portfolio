@@ -38,6 +38,10 @@
     font-weight: 200;
 }
 
+.home-button{
+    cursor: pointer;
+}
+
 .logo{
     width: 110px;
     padding: 10px 32px;
@@ -54,8 +58,6 @@
 .toggle-button {
     position: absolute;
     display: none;
-    /* flex-direction: column;
-    justify-content: space-between; */
     top: 30%;
     right: 20px;
     width: 45px;

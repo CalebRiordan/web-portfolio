@@ -148,6 +148,13 @@ label{
     box-sizing: border-box;
 }
 
+.input-invalid-textarea {
+    position: relative;
+    font-size: 22px;
+    color: rgb(220, 53, 69);
+    margin-top: 10px;
+}
+
 .is-invalid{
     border: 2px solid rgb(220, 53, 69);
 }
