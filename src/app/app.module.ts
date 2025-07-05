@@ -14,7 +14,7 @@ import { SkillsComponent } from './layouts/skills/skills.component';
 import { FeaturedProjectComponent } from './layouts/featured-project/featured-project.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { RippleEffectDirective } from './directives/ripple-effect.directive';
@@ -24,34 +24,27 @@ import { ProjectCardComponent } from './pages/dashboard/project-card/project-car
 import { EditProjectComponent } from './pages/dashboard/edit-project/edit-project.component';
 import { ConfirmationDialogComponent } from './layouts/confirmation-dialog/confirmation-dialog.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    NavbarComponent,
-    FooterComponent,
-    AboutMeComponent,
-    ProjectsComponent,
-    ContactMeComponent,
-    SkillsComponent,
-    FeaturedProjectComponent,
-    RippleEffectDirective,
-    LoginPageComponent,
-    DashboardMainComponent,
-    ProjectCardComponent,
-    EditProjectComponent,
-    ConfirmationDialogComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    MatSnackBarModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatDialogModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HomeComponent,
+        NavbarComponent,
+        FooterComponent,
+        AboutMeComponent,
+        ProjectsComponent,
+        ContactMeComponent,
+        SkillsComponent,
+        FeaturedProjectComponent,
+        RippleEffectDirective,
+        LoginPageComponent,
+        DashboardMainComponent,
+        ProjectCardComponent,
+        EditProjectComponent,
+        ConfirmationDialogComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        MatSnackBarModule,
+        BrowserAnimationsModule,
+        MatDialogModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {}
