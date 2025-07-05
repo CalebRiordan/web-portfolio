@@ -14,7 +14,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/layouts/confirmation-dialog/confirmation-dialog.component';
 import { Observable } from 'rxjs';
 import { ProjectsService } from 'src/app/services/projects.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
