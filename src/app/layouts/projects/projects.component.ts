@@ -12,9 +12,10 @@ import { ProjectsService } from 'src/app/services/projects.service';
 import { ScrollService } from 'src/app/services/scroll-service.service';
 
 @Component({
-  selector: 'app-projects',
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.css'],
+    selector: 'app-projects',
+    templateUrl: './projects.component.html',
+    styleUrls: ['./projects.component.css'],
+    standalone: false
 })
 export class ProjectsComponent implements OnInit, AfterViewInit {
   showFillerLine: boolean = false;

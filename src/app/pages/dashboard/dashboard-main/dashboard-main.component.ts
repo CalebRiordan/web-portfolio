@@ -9,9 +9,10 @@ import { ProjectsService } from 'src/app/services/projects.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
-  selector: 'app-dashboard-main',
-  templateUrl: './dashboard-main.component.html',
-  styleUrls: ['./dashboard-main.component.css']
+    selector: 'app-dashboard-main',
+    templateUrl: './dashboard-main.component.html',
+    styleUrls: ['./dashboard-main.component.css'],
+    standalone: false
 })
 export class DashboardMainComponent implements OnInit{
   projects: Project[] = [];

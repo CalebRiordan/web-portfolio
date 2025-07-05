@@ -1,9 +1,10 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-skills',
-  templateUrl: './skills.component.html',
-  styleUrls: ['./skills.component.css']
+    selector: 'app-skills',
+    templateUrl: './skills.component.html',
+    styleUrls: ['./skills.component.css'],
+    standalone: false
 })
 export class SkillsComponent{
   private cvUrl: string = "assets/Caleb Riordan - Curriculum Vitae.pdf";

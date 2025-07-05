@@ -17,9 +17,10 @@ import { ProjectsService } from 'src/app/services/projects.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
-  selector: 'app-project-card',
-  templateUrl: './project-card.component.html',
-  styleUrls: ['./project-card.component.css'],
+    selector: 'app-project-card',
+    templateUrl: './project-card.component.html',
+    styleUrls: ['./project-card.component.css'],
+    standalone: false
 })
 export class ProjectCardComponent implements OnInit, AfterViewInit {
   thumbnailUrl: string = '';

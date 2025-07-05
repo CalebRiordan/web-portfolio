@@ -5,9 +5,10 @@ import { MessagesService } from 'src/app/services/messages.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
-  selector: 'app-contact-me',
-  templateUrl: './contact-me.component.html',
-  styleUrls: ['./contact-me.component.css'],
+    selector: 'app-contact-me',
+    templateUrl: './contact-me.component.html',
+    styleUrls: ['./contact-me.component.css'],
+    standalone: false
 })
 export class ContactMeComponent implements OnInit {
   formProcessing: boolean = false;

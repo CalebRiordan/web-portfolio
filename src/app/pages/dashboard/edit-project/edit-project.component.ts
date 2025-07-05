@@ -12,9 +12,10 @@ import { ProjectsService } from 'src/app/services/projects.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
-  selector: 'app-edit-project',
-  templateUrl: './edit-project.component.html',
-  styleUrls: ['./edit-project.component.css'],
+    selector: 'app-edit-project',
+    templateUrl: './edit-project.component.html',
+    styleUrls: ['./edit-project.component.css'],
+    standalone: false
 })
 export class EditProjectComponent implements OnInit {
   project: Project = emptyProject;

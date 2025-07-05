@@ -12,9 +12,10 @@ import {
 import { Project, emptyProject } from 'src/app/models/project';
 
 @Component({
-  selector: 'app-featured-project',
-  templateUrl: './featured-project.component.html',
-  styleUrls: ['./featured-project.component.css'],
+    selector: 'app-featured-project',
+    templateUrl: './featured-project.component.html',
+    styleUrls: ['./featured-project.component.css'],
+    standalone: false
 })
 export class FeaturedProjectComponent implements OnInit, OnChanges {
   inView: boolean = false;
