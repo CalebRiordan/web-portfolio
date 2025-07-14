@@ -1,14 +1,14 @@
-:root{
+:root {
     --header-height: 90px;
     --hamburger-timing-function: 0.2s ease-in-out;
     --about-me-gradient: rgba(var(--highlight-colour), 0.5) 150px, rgba(var(--highlight-colour), 0.3) 200px, rgba(var(--highlight-colour), 0.1) 400px, rgba(var(--highlight-colour), 0.03) 650px, rgb(var(--primary-colour)) 60%;
 }
 
-.shadow-bottom{
+.shadow-bottom {
     box-shadow: 0px, 4px, 2px, -2px black;
 }
 
-body{
+body {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -18,10 +18,6 @@ body{
     overflow-y: scroll;
 }
 
-.logo{
-    width: 100px;
-}
-
 html {
     margin: 0;
     padding: 0;
@@ -29,27 +25,28 @@ html {
     scroll-behavior: smooth;
     scroll-padding-top: var(--header-height);
     box-sizing: border-box;
+    background-color: rgb(var(--primary-colour));
 }
 
 .scroll-offset {
     scroll-margin-top: 100px;
 }
 
-.heading{
+.heading {
     padding: 20px 0;
     font-size: 64px;
     font-weight: 700;
-   color: rgb(var(--text-colour));
+    color: rgb(var(--text-colour));
 }
 
-.background-panel{
+.background-panel {
     background-color: rgb(var(--primary-colour));
     margin: 0;
     width: 100%;
     height: auto;
 }
 
-.space{
+.space {
     height: 1000px;
 }
 
@@ -59,15 +56,12 @@ html {
 }
 
 .button {
-    position: relative;
-    width: 5em;
-    height: auto;
-    padding: 5px;
     background-color: transparent;
     border: 2px solid rgb(var(--highlight-colour));
     border-radius: 5em;
+    padding: 5px 10px;
     font-size: 32px;
-   color: rgb(var(--text-colour));
+    color: rgb(var(--text-colour));
     overflow: hidden;
 }
 
@@ -75,7 +69,7 @@ html {
     background-color: rgba(var(--highlight-colour), 0.4);
 }
 
-.button:disabled{
+.button:disabled {
     border-color: grey;
     color: grey;
 }
@@ -92,18 +86,19 @@ html {
     animation: ripple 0.3s linear;
 }
 
-@keyframes ripple { 
+@keyframes ripple {
     from {
         opacity: 0.6;
         width: 1%;
         height: 100px;
-    } 
+    }
+
     to {
         opacity: 0.2;
         width: 130%;
         height: 300%;
     }
-} 
+}
 
 /* Angular Material SnackBar START */
 
@@ -115,14 +110,14 @@ html {
 .mdc-button .mdc-button__label {
     font-size: 24px;
     font-weight: 800;
-    color: rgba(var(--highlight-colour), 0.4);    
+    color: rgba(var(--highlight-colour), 0.4);
 }
 
 .mdc-button .mdc-button__label:hover {
     color: rgba(var(--highlight-colour), 0.85);
 }
 
-.dialog-background .mdc-dialog__surface{
+.dialog-background .mdc-dialog__surface {
     border: 3px solid rgb(var(--highlight-colour));
     border-radius: 20px;
     background-color: rgb(var(--primary-colour)) !important;
@@ -138,11 +133,11 @@ html {
         scroll-snap-type: none !important;
     }
 
-    html{
+    html {
         overflow-x: hidden;
     }
 
-    :root{
+    :root {
         --header-height: 65px;
     }
 

@@ -1,76 +1,99 @@
 <div id="skills" class="skills-section scroll-offset">
-  <div class="heading">Skills</div>
-  <div class="skills">
-    <div class="skills-container">
-      <div class="skill" (click)="navigateToWebsite('angular')">
-        <img
-          class="logo"
-          src="assets/logos/Angular_Gray.png"
-          alt="Angular logo"
-        />
+  <div class="heading">My Skills</div>
+  <div class="skills-hover-wrapper" (mouseleave)="onSkillsLeave()">
+    <!-- Skills Container -->
+    <div #skills class="skills" (mouseenter)="onSkillsEnter()">
+      <!-- Skills -->
+      <div #skill class="skill" (click)="navigateToWebsite('angular')">
+        <div class="image">
+          <img
+            class="logo"
+            src="assets/logos/Angular.png"
+            alt="Angular logo"
+          />
+        </div>
         <p>Angular</p>
       </div>
 
-      <div class="skill" (click)="navigateToWebsite('aspnet')">
+      <div #skill class="skill" (click)="navigateToWebsite('typescript')">
         <div class="image">
           <img
-            class="logo wider"
-            src="assets/logos/ASPNET_Gray.png"
+            class="logo"
+            src="assets/logos/TypeScript.png"
+            alt="Typescript logo"
+          />
+        </div>
+        <p>TypeScript</p>
+      </div>
+
+      <div #skill class="skill" (click)="navigateToWebsite('php')">
+        <div class="image image-smaller">
+          <img class="logo" src="assets/logos/PHP.png" alt="PHP logo" />
+        </div>
+        <p>PHP</p>
+      </div>
+
+      <div #skill class="skill" (click)="navigateToWebsite('aspnet')">
+        <div class="image image-smaller">
+          <img
+            class="logo"
+            src="assets/logos/ASPNET.png"
             alt="Angular logo"
           />
         </div>
         <p>ASP.NET</p>
       </div>
 
-      <div class="skill" (click)="navigateToWebsite('csharp')">
+      <div #skill class="skill" (click)="navigateToWebsite('csharp')">
         <div class="image">
           <img
             class="logo"
-            src="assets/logos/CSharp_Gray.png"
+            src="assets/logos/CSharp.png"
             alt="Angular logo"
           />
         </div>
         <p>C#</p>
       </div>
-    </div>
 
-    <div class="skills-container">
-      <div class="skill" (click)="navigateToWebsite('html')">
+      <div #skill class="skill" (click)="navigateToWebsite('html')">
         <div class="image">
           <img
             class="logo"
-            src="assets/logos/HTML_Gray.png"
+            src="assets/logos/HTML.png"
             alt="Angular logo"
           />
         </div>
         <p>HTML</p>
       </div>
 
-      <div class="skill" (click)="navigateToWebsite('css')">
+      <div #skill class="skill" (click)="navigateToWebsite('css')">
         <div class="image css-image">
           <img
             class="logo"
-            src="assets/logos/CSS_Gray.png"
+            src="assets/logos/CSS.png"
             alt="Angular logo"
           />
         </div>
         <p>CSS</p>
       </div>
 
-      <div class="skill" (click)="navigateToWebsite('mysql')">
-        <div class="image">
+      <div #skill class="skill" (click)="navigateToWebsite('mysql')">
+        <div class="image image-smaller">
           <img
-            class="logo wider"
-            src="assets/logos/MySQL_Gray.png"
+            class="logo"
+            src="assets/logos/MySQL.png"
             alt="Angular logo"
           />
         </div>
         <p>MySQL</p>
       </div>
     </div>
-  </div>
-  <div>
-      <button class="button CV-button" appRippleEffect (click)="openCV()">See CV</button>
+
+    <div>
+      <button class="button CV-button" appRippleEffect (click)="openCV()">
+        View my CV
+      </button>
+    </div>
   </div>
 
   <div class="container-relative">

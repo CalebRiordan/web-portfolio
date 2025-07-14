@@ -9,13 +9,15 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { Project, emptyProject } from 'src/app/models/project';
+import { CommonModule } from '@angular/common';
+import { Project, emptyProject } from 'app/models/project';
 
 @Component({
     selector: 'app-featured-project',
-    templateUrl: './featured-project.component.html',
-    styleUrls: ['./featured-project.component.css'],
-    standalone: false
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl:  './featured-project.component.html',
+    styleUrls: ['./featured-project.component.css']
 })
 export class FeaturedProjectComponent implements OnInit, OnChanges {
   inView: boolean = false;

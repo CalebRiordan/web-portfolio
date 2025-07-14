@@ -1,6 +1,6 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../environment.prod';
+import { env } from '../../environment';
 import { CreateMessageModel, Message } from '../models/message';
 import { Observable, catchError, throwError } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { Observable, catchError, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class MessagesService {
-  baseApiUrl: string = environment.baseApiUrl;
+  baseApiUrl: string = env.baseApiUrl;
 
   constructor(private http: HttpClient) {}
 

@@ -1,4 +1,5 @@
 import { ElementRef, Injectable } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Observable, fromEvent } from 'rxjs';
 import { map } from 'rxjs/operators';
 

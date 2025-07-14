@@ -45,7 +45,6 @@ src/.editorconfig
 Thumbs.db
 
 # Environment files
-src/app/environment.development.ts
 src/app/environment.prod.ts
 
 # Angular component folders and services

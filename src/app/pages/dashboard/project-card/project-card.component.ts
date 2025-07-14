@@ -7,20 +7,22 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { Project } from 'src/app/models/project';
-import { DataService } from 'src/app/services/data.service';
+import { Project } from 'app/models/project';
+import { DataService } from 'app/services/data.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from 'src/app/layouts/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from 'app/layouts/confirmation-dialog/confirmation-dialog.component';
 import { Observable } from 'rxjs';
-import { ProjectsService } from 'src/app/services/projects.service';
-import { SnackbarService } from 'src/app/services/snackbar.service';
+import { ProjectsService } from 'app/services/projects.service';
+import { SnackbarService } from 'app/services/snackbar.service';
 
 @Component({
-    selector: 'app-project-card',
-    templateUrl: './project-card.component.html',
-    styleUrls: ['./project-card.component.css'],
-    standalone: false
+  selector: 'app-project-card',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './project-card.component.html',
+  styleUrls: ['./project-card.component.css'],
 })
 export class ProjectCardComponent implements OnInit, AfterViewInit {
   thumbnailUrl: string = '';

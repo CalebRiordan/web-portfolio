@@ -1,4 +1,4 @@
-.about-me-section{
+.about-me-section {
     width: 100%;
     position: relative;
     height: auto;
@@ -8,13 +8,13 @@
     scroll-snap-align: top;
 }
 
-.recipe-image-grid{
+.recipe-image-grid {
     display: grid;
     grid-template-columns: 35% 35%;
     justify-content: center;
 }
 
-.recipe{
+.recipe {
     color: rgb(var(--text-colour));
     margin: 0 auto;
 }
@@ -25,33 +25,33 @@
     justify-content: center;
 }
 
-.cauldron-image img{
+.cauldron-image img {
     width: 450px;
 }
 
-.recipe-title{
+.recipe-title {
     font-size: 50px;
     font-weight: 500;
 }
 
-.scroll-offset{
+.scroll-offset {
     scroll-margin-top: 20px;
 }
 
-.text-delicious{
+.text-delicious {
     font-family: 'Dancing Script', 'Brush Script MT', 'Comic Sans MS', cursive;
     font-size: 52px;
     font-weight: 150;
 }
 
-.ingredient{
+.ingredient {
     font-size: 32px;
     font-weight: bold;
     padding: 0.25em 0;
     margin-left: 0.7em;
 }
 
-.highlight{
+.highlight {
     position: relative;
     padding: 0 3px 1px 1px;
     z-index: 0;
@@ -64,104 +64,109 @@
     right: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        180deg,
-        transparent 70%,
-        rgba(var(--highlight-colour), 0.7) 30%
-    );
+    background: linear-gradient(180deg,
+            transparent 70%,
+            rgba(var(--highlight-colour), 0.7) 30%);
     z-index: -1;
-  }
+}
 
-.underline{
+.underline {
     width: 330px;
     height: 1.5px;
     margin-left: 15px;
     background-color: rgb(var(--highlight-colour));
 }
 
-.introduction{
+.introduction {
     padding: 300px 0;
     display: grid;
-    grid-template-columns: 25% 30px 50% 30px;
+    grid-template-columns: 18% 30px 64% 30px;
     justify-items: left;
 
     scroll-snap-align: center;
 }
 
-.introduction .content{
+.introduction .content {
     padding: 0 50px;
     width: auto;
     transform: translateY(200px);
     opacity: 0;
 }
 
-.introduction .content.active{
+.introduction .content.active {
     transform: translateY(0);
     opacity: 1;
     transition: 0.8s all ease .1s;
 }
 
-.introduction .content.inactive{
+.introduction .content.inactive {
     opacity: 0;
 }
 
-.introduction h1{
+.introduction h1 {
     margin: 0 0 30px 0;
     color: rgb(var(--text-colour));
     font-size: 62px;
     font-weight: 700;
 }
 
-.introduction p{
+.introduction p {
     margin: 0;
     color: rgb(var(--text-colour));
     font-size: 32px;
     font-weight: 600;
 }
 
-.frame-corner-left{
+.frame-corner-left {
     width: 30px;
-    fill:rgb(var(--highlight-colour));
+    fill: rgb(var(--highlight-colour));
 }
 
-.frame-corner-right{
+.frame-corner-right {
     width: 30px;
     fill: rgb(var(--highlight-colour));
     align-self: last baseline;
 }
 
-.fadeToRight{
+.fadeToRight {
     animation: fadeToRight 1s ease-out forwards;
 }
 
-.hidden-left{
+.hidden-left {
     animation: fadeAwayLeft 0.6s linear forwards;
 }
 
-.fadeToLeft{
+.fadeToLeft {
     animation: fadeToLeft 1s ease-out forwards;
 }
 
-.hidden-right{
+.hidden-right {
     animation: fadeAwayRight 0.6s linear forwards;
 }
 
-@keyframes fadeToRight{
-    0%, 40%{
+@keyframes fadeToRight {
+
+    0%,
+    40% {
         opacity: 0;
         transform: rotate(90deg) translateY(100px) translateX(-30px);
     }
+
     100% {
         opacity: 1;
-        transform: rotate(90deg) translateY(-30px) translateX(-30px);;
+        transform: rotate(90deg) translateY(-30px) translateX(-30px);
+        ;
     }
-} 
+}
 
 @keyframes fadeToLeft {
-    0%, 40% {
+
+    0%,
+    40% {
         opacity: 0;
         transform: rotate(-90deg) translateY(100px) translateX(-40px);
     }
+
     100% {
         opacity: 1;
         transform: rotate(-90deg) translateY(-30px) translateX(-40px);
@@ -173,6 +178,7 @@
         opacity: 1;
         transform: rotate(90deg) translateY(-30px) translateX(-30px);
     }
+
     to {
         opacity: 0;
         transform: rotate(90deg) translateY(100px) translateX(-30px);
@@ -184,10 +190,11 @@
         opacity: 1;
         transform: rotate(-90deg) translateY(-60px) translateX(-30px);
     }
+
     to {
         opacity: 0;
         transform: rotate(-90deg) translateY(100px) translateX(-30px);
-     }
+    }
 }
 
 /* MEDIA QUERIES */
@@ -198,7 +205,7 @@
         background: radial-gradient(circle at 70% 25em, var(--about-me-gradient));
     }
 
-    .recipe-image-grid{
+    .recipe-image-grid {
         grid-template-columns: 40% 40%;
     }
 
@@ -219,12 +226,12 @@
         grid-template-columns: 10% 30px 75% 30px;
     }
 
-    .introduction h1{
+    .introduction h1 {
         font-size: 54px;
         margin-bottom: 15px;
     }
-    
-    .introduction p{
+
+    .introduction p {
         font-size: 28px;
     }
 }
@@ -240,27 +247,27 @@
         grid-template-columns: 92% 0;
     }
 
-    .recipe{
+    .recipe {
         margin-left: 20px;
     }
 
-    .recipe-title{
+    .recipe-title {
         font-size: 30px;
     }
 
-    .text-delicious{
+    .text-delicious {
         font-size: 32px;
     }
 
-    .underline{
+    .underline {
         width: 190px;
     }
 
-    .ingredient{
+    .ingredient {
         font-size: 18px;
     }
 
-    .cauldron-image img{
+    .cauldron-image img {
         width: 0;
     }
 
@@ -275,11 +282,11 @@
         padding: 0 15px;
     }
 
-    .introduction h1{
+    .introduction h1 {
         font-size: 22px;
     }
-    
-    .introduction p{
+
+    .introduction p {
         font-size: 16px;
     }
 
@@ -293,6 +300,6 @@
 
     .frame-corner-right {
         width: 20px;
-    }    
+    }
 
 }

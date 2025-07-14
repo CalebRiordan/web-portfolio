@@ -7,7 +7,7 @@ import {
   map,
   throwError,
 } from 'rxjs';
-import { environment } from '../environment.prod';
+import { env } from '../../environment';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class ProjectsService {
 
   constructor(private http: HttpClient) {}
 
-  baseApiUrl: string = environment.baseApiUrl;
+  baseApiUrl: string = env.baseApiUrl;
 
   getProjects(): Observable<ApiProject[]> {
     return this.http.get<ApiProject[]>(`${this.baseApiUrl}/api/projects`).pipe(

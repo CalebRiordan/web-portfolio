@@ -1,4 +1,5 @@
 import { inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { SnackbarService } from './snackbar.service';

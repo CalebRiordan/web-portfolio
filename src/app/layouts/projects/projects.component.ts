@@ -7,19 +7,27 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { Project, emptyProject } from 'src/app/models/project';
-import { ProjectsService } from 'src/app/services/projects.service';
-import { ScrollService } from 'src/app/services/scroll-service.service';
+import { CommonModule } from '@angular/common';
+import { Project, emptyProject } from 'app/models/project';
+import { ProjectsService } from 'app/services/projects.service';
+import { ScrollService } from 'app/services/scroll-service.service';
+import { FeaturedProjectComponent } from '../featured-project/featured-project.component';
 
 @Component({
-    selector: 'app-projects',
-    templateUrl: './projects.component.html',
-    styleUrls: ['./projects.component.css'],
-    standalone: false
+  selector: 'app-projects',
+  standalone: true,
+  imports: [FeaturedProjectComponent, CommonModule],
+  templateUrl: './projects.component.html',
+  styleUrls: ['./projects.component.css'],
 })
 export class ProjectsComponent implements OnInit, AfterViewInit {
   showFillerLine: boolean = false;
-  projects: Project[] = [emptyProject, emptyProject, emptyProject, emptyProject];
+  projects: Project[] = [
+    emptyProject,
+    emptyProject,
+    emptyProject,
+    emptyProject,
+  ];
 
   @ViewChild('projectsContainer') projContainer!: ElementRef;
 
@@ -35,29 +43,32 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  constructor(private scrollService: ScrollService, private projService: ProjectsService, private ref: ChangeDetectorRef){
-    this.projService.getProjects().subscribe(res => {
-      if (res){
+  constructor(
+    private scrollService: ScrollService,
+    private projService: ProjectsService,
+    private ref: ChangeDetectorRef
+  ) {
+    this.projService.getProjects().subscribe((res) => {
+      if (res) {
         //Map values of API Project model to local Project model
-        this.projects = res.map(apiProject => this.projService.convertApiToLocalProject(apiProject));
+        this.projects = res.map((apiProject) =>
+          this.projService.convertApiToLocalProject(apiProject)
+        );
       }
     });
   }
 
   ngAfterViewInit(): void {
-    this.scrollService.scrollIntoView(this.projContainer).subscribe(isInView => {
-        if (isInView){
+    this.scrollService
+      .scrollIntoView(this.projContainer)
+      .subscribe((isInView) => {
+        if (isInView) {
           document.documentElement.style.scrollSnapType = 'Y mandatory';
         } else {
           document.documentElement.style.scrollSnapType = 'Y proximity';
-        }      
-      }
-    );
+        }
+      });
   }
 
-  ngOnInit(): void {
-    
-    
-  }
-
+  ngOnInit(): void {}
 }
