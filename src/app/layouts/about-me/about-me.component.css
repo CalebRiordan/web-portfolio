@@ -2,15 +2,15 @@
     width: 100%;
     position: relative;
     height: auto;
-    padding: 90px 0 0 0;
-    background: radial-gradient(circle at 67.3% 25em, var(--about-me-gradient));
+    padding: 3rem 0 0 0;
+    background: radial-gradient(circle at 69% 25em, var(--about-me-gradient));
 
     scroll-snap-align: top;
 }
 
 .recipe-image-grid {
     display: grid;
-    grid-template-columns: 35% 35%;
+    grid-template-columns: 38% 38%;
     justify-content: center;
 }
 
@@ -30,25 +30,25 @@
 }
 
 .recipe-title {
-    font-size: 50px;
+    font-size: 2.5rem;
     font-weight: 500;
-}
-
-.scroll-offset {
-    scroll-margin-top: 20px;
 }
 
 .text-delicious {
     font-family: 'Dancing Script', 'Brush Script MT', 'Comic Sans MS', cursive;
-    font-size: 52px;
+    font-size: 2.5rem;
     font-weight: 150;
 }
 
+.scroll-offset {
+    scroll-margin-top: 1.1rem;
+}
+
 .ingredient {
-    font-size: 32px;
+    font-size: 1.5rem;
     font-weight: bold;
-    padding: 0.25em 0;
-    margin-left: 0.7em;
+    padding: 0.4rem 0;
+    margin-left: 1.2rem;
 }
 
 .highlight {
@@ -70,6 +70,25 @@
     z-index: -1;
 }
 
+.github-repo-btn {
+    font-size: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+    border-radius: 0.5rem;
+    margin: 1.2rem 0 0 1.2rem;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+}
+
+.github-repo-btn .icon {
+    fill: rgb(var(--text-colour));
+}
+
 .underline {
     width: 330px;
     height: 1.5px;
@@ -78,7 +97,7 @@
 }
 
 .introduction {
-    padding: 300px 0;
+    padding: 16.5em 0;
     display: grid;
     grid-template-columns: 18% 30px 64% 30px;
     justify-items: left;
@@ -87,7 +106,7 @@
 }
 
 .introduction .content {
-    padding: 0 50px;
+    padding: 0 2.8rem;
     width: auto;
     transform: translateY(200px);
     opacity: 0;
@@ -104,26 +123,26 @@
 }
 
 .introduction h1 {
-    margin: 0 0 30px 0;
+    margin: 0 0 2rem 0;
     color: rgb(var(--text-colour));
-    font-size: 62px;
+    font-size: 3.5rem;
     font-weight: 700;
 }
 
 .introduction p {
     margin: 0;
     color: rgb(var(--text-colour));
-    font-size: 32px;
+    font-size: 1.8rem;
     font-weight: 600;
 }
 
 .frame-corner-left {
-    width: 30px;
+    width: 1.7rem;
     fill: rgb(var(--highlight-colour));
 }
 
 .frame-corner-right {
-    width: 30px;
+    width: 1.7rem;
     fill: rgb(var(--highlight-colour));
     align-self: last baseline;
 }
@@ -199,40 +218,27 @@
 
 /* MEDIA QUERIES */
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1300px) {
 
     .about-me-section {
-        background: radial-gradient(circle at 70% 25em, var(--about-me-gradient));
+        background: radial-gradient(circle at 72% 25em, var(--about-me-gradient));
     }
 
     .recipe-image-grid {
-        grid-template-columns: 40% 40%;
-    }
-
-    .recipe-title {
-        font-size: 44px;
-    }
-
-    .ingredient {
-        font-size: 28px;
+        grid-template-columns: 42% 42%;
+        column-gap: 4%;
     }
 
     .cauldron-image img {
         width: 380px;
     }
 
-
     .introduction {
         grid-template-columns: 10% 30px 75% 30px;
     }
 
     .introduction h1 {
-        font-size: 54px;
         margin-bottom: 15px;
-    }
-
-    .introduction p {
-        font-size: 28px;
     }
 }
 
@@ -248,46 +254,32 @@
     }
 
     .recipe {
-        margin-left: 20px;
-    }
-
-    .recipe-title {
-        font-size: 30px;
-    }
-
-    .text-delicious {
-        font-size: 32px;
+        margin-left: 1rem;
     }
 
     .underline {
         width: 190px;
     }
 
-    .ingredient {
-        font-size: 18px;
-    }
-
     .cauldron-image img {
         width: 0;
     }
 
-
     .introduction {
-        grid-template-columns: 5% 30px 80% 30px;
-        padding: 150px 0;
-        margin: 100px 0 50px 0;
+        grid-template-columns: 3% 30px 82% 30px;
+        margin: 120px 0 60px 0;
     }
 
     .introduction .content {
-        padding: 0 15px;
+        padding: 0 1.8rem 0 1.4rem;
     }
 
     .introduction h1 {
-        font-size: 22px;
+        font-size: 2.5rem;
     }
 
     .introduction p {
-        font-size: 16px;
+        font-size: 1.4rem;
     }
 
     .content br {

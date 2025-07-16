@@ -4,6 +4,7 @@ import {
   HostListener,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Renderer2,
   SimpleChanges,
@@ -11,15 +12,20 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Project, emptyProject } from 'app/models/project';
+import { RippleEffectDirective } from 'app/directives/ripple-effect.directive';
+import { ResizeService } from 'app/services/resize.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-featured-project',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RippleEffectDirective],
   templateUrl:  './featured-project.component.html',
     styleUrls: ['./featured-project.component.css']
 })
-export class FeaturedProjectComponent implements OnInit, OnChanges {
+export class FeaturedProjectComponent implements OnInit, OnChanges, OnDestroy {
+  private layoutSubscription!: Subscription;
+
   inView: boolean = false;
   projOdd: Boolean = false;
   projectData!: Project;
@@ -48,14 +54,9 @@ export class FeaturedProjectComponent implements OnInit, OnChanges {
     }
   }
 
-  @HostListener('window:resize', ['$event']) onWindowResize() {
-    this.winWidth = window.innerWidth;
-    this.winWidth <= 820
-      ? (this.isMobileScreen = true)
-      : (this.isMobileScreen = false);
+  constructor(private renderer: Renderer2, private resizer: ResizeService) {
+    this.layoutSubscription = this.resizer.isSmallLayout$.subscribe(value => this.isMobileScreen = value)
   }
-
-  constructor(private renderer: Renderer2) {}
 
   ngOnInit(): void {
     this.projNum = this.projInfo[0];
@@ -121,4 +122,8 @@ export class FeaturedProjectComponent implements OnInit, OnChanges {
   onOpenDemo() {
     window.open(this.projectData.demoLink, '_blank');
   }
+
+  ngOnDestroy(): void {
+    this.layoutSubscription.unsubscribe();
+  }  
 }

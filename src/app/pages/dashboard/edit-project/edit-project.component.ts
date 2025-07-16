@@ -6,11 +6,12 @@ import { CreateProjectModel, Project, emptyProject } from 'app/models/project';
 import { DataService } from 'app/services/data.service';
 import { ProjectsService } from 'app/services/projects.service';
 import { SnackbarService } from 'app/services/snackbar.service';
+import { RippleEffectDirective } from 'app/directives/ripple-effect.directive';
 
 @Component({
   selector: 'app-edit-project',
   standalone: true,
-  imports: [CommonModule, RouterLink, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, RippleEffectDirective],
   templateUrl: './edit-project.component.html',
   styleUrls: ['./edit-project.component.css'],
 })

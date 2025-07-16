@@ -45,8 +45,8 @@ export class NavbarComponent implements OnInit {
 
   onToggleLightMode() {
     this.themeService.toggleTheme();
-    this.themeService.isDarkMode
-      ? (this.sigImg = `${this.baseSigImgPath}sig_white.png`)
-      : (this.sigImg = `${this.baseSigImgPath}sig_darkblue.png`);
+    this.sigImg = this.themeService.isDarkMode
+      ? `${this.baseSigImgPath}sig_white.png`
+      : `${this.baseSigImgPath}sig_darkblue.png`;
   }
 }

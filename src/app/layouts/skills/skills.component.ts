@@ -10,11 +10,14 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RippleEffectDirective } from 'app/directives/ripple-effect.directive';
+import { ResizeService } from 'app/services/resize.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-skills',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RippleEffectDirective],
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.css'],
 })
@@ -22,12 +25,14 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
   private cvUrl: string = 'assets/Caleb Riordan - Curriculum Vitae.pdf';
 
   // Carousel variables
+  private resizeSubscription!: Subscription;
+  private layoutSubscription!: Subscription;
   carouselWidth!: number;
   rotationOffset = 0;
   rotationInterval!: any;
+  numActiveItems = 4;
   skillPadding!: number;
   skillWidth!: number;
-  resizeTimeout: any;
   rotationActive = true;
 
   // Links
@@ -47,6 +52,24 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
   @ViewChild('skills') skillsContainer!: ElementRef;
   @ViewChildren('skill') skills!: QueryList<ElementRef>;
 
+  constructor(private renderer: Renderer2, private resizer: ResizeService) {}
+
+  ngAfterViewInit(): void {
+    // Set up resize observer to update carousel measurements
+    this.resizeSubscription = this.resizer.resize$.subscribe(() =>
+      this.updateCarouselMeasurements()
+    );
+
+    // Update number of items visible on carousel
+    this.layoutSubscription = this.resizer.isSmallLayout$.subscribe(
+      (isMobileLayout) => {        
+        this.numActiveItems = isMobileLayout ? 3 : 4;
+        this.setCarouselState(this.rotationOffset);
+        this.setCarouselTimer();
+      }
+    );
+  }
+
   onSkillsEnter() {
     if (!this.rotationActive) return;
     this.rotationActive = false;
@@ -62,7 +85,7 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
 
       // Fade in
       this.renderer.removeClass(skillsEl, 'fade');
-    }, 300);
+    }, 200);
   }
 
   onSkillsLeave() {
@@ -81,27 +104,8 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
       setTimeout(() => {
         this.renderer.removeClass(skillsEl, 'no-transform-transition');
         this.rotationActive = true;
-      }, 300);
-    }, 300);
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
-    if (this.resizeTimeout) {
-      clearTimeout(this.resizeTimeout);
-    }
-
-    this.resizeTimeout = setTimeout(() => {
-      this.updateCarouselMeasurements();
-    }, 300);
-  }
-
-  constructor(private renderer: Renderer2) {}
-
-  ngAfterViewInit(): void {
-    // Carousel initial state
-    this.setCarouselState(0);
-    this.setCarouselTimer();
+      }, 200);
+    }, 200);
   }
 
   navigateToWebsite(technology: string) {
@@ -113,10 +117,11 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
   }
 
   updateCarouselMeasurements() {
-    // Adjust skills measurements
+    // Adjust skills measurements    
     this.carouselWidth = this.skillsContainer.nativeElement.clientWidth;
-    this.skillWidth = this.carouselWidth * 0.21;
     this.skillPadding = this.carouselWidth * 0.02;
+    this.skillWidth =
+      this.carouselWidth * (1 / this.numActiveItems - 2 * 0.02);
 
     // Apply new measurements to elements
     this.skills.forEach((skill: ElementRef) => {
@@ -129,6 +134,9 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
   }
 
   setCarouselTimer() {
+    if (this.rotationInterval) {
+      clearInterval(this.rotationInterval);
+    }
     this.rotationInterval = setInterval(() => {
       if (this.rotationActive) {
         this.rotateSkills();
@@ -136,27 +144,52 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
     }, 2000);
   }
 
+  setCarouselState(start: number = 0) {
+    this.rotationOffset = start;
+    this.updateCarouselMeasurements();
+    const skillsArray = this.skills.toArray();
+
+    skillsArray.forEach((skill: ElementRef, i: number) => {
+      this.renderer.addClass(skill.nativeElement, 'no-transform-transition');
+
+      for (let j = start; j <= start + this.numActiveItems; j++) {
+        if (i === j % skillsArray.length) {
+          // Show skill
+          this.shiftSkill(skill, j - start - 1);
+          break;
+        } else {
+          // Hide skill
+          this.renderer.setStyle(
+            skill.nativeElement,
+            'transform',
+            'translateX(0)'
+          );
+        }
+      }
+      this.renderer.removeClass(skill.nativeElement, 'no-transform-transition');
+    });
+  }
+
   rotateSkills() {
     const skillsArray = this.skills.toArray();
     this.rotationOffset = this.rotationOffset % skillsArray.length;
     let skillsToRotate: ElementRef[] = [];
 
-    for (let i = 1; i < 6; i++) {
+    for (let i = 1; i <= this.numActiveItems + 1; i++) {
       const index = (i + this.rotationOffset) % skillsArray.length;
       skillsToRotate.push(skillsArray[index]);
     }
 
     // Move the left-most skill back to original position
-    const elapsedSkill = skillsArray[this.rotationOffset].nativeElement;    
+    const elapsedSkill = skillsArray[this.rotationOffset].nativeElement;
     this.renderer.addClass(elapsedSkill, 'hide');
     this.renderer.setStyle(elapsedSkill, 'transform', `translateX(0)`);
     elapsedSkill.offsetHeight; // Trigger reflow to ensure styles are applied immediately
     this.renderer.removeClass(elapsedSkill, 'hide');
-    // skillsToRotate.splice(0, 1);
 
     // Rotate skills
     skillsToRotate.forEach((skill: ElementRef, i: number) => {
-      this.shiftSkill(skill, i-1);
+      this.shiftSkill(skill, i - 1);
     });
 
     // Update rotation offset
@@ -176,32 +209,11 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
     );
   }
 
-  setCarouselState(start: number = 0) {
-    this.rotationOffset = start;
-    this.updateCarouselMeasurements();
-
-    this.skills.toArray().forEach((skill: ElementRef, i: number) => {
-      this.renderer.addClass(skill.nativeElement, 'no-transform-transition');
-
-      if (i >= start && i < start + 5) {
-        // Show skill
-        this.shiftSkill(skill, i - start - 1);
-      } else {
-        // Hide skill
-        this.renderer.setStyle(
-          skill.nativeElement,
-          'transform',
-          'translateX(0)'
-        );
-      }
-
-      this.renderer.removeClass(skill.nativeElement, 'no-transform-transition');
-    });
-  }
-
   ngOnDestroy(): void {
     if (this.rotationInterval) {
       clearInterval(this.rotationInterval);
     }
+    this.resizeSubscription.unsubscribe();
+    this.layoutSubscription.unsubscribe();
   }
 }

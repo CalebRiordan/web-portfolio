@@ -1,5 +1,4 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Directive({ selector: '[appRippleEffect]' })
 export class RippleEffectDirective {

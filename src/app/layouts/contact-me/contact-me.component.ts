@@ -10,11 +10,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CreateMessageModel } from 'app/models/message';
 import { MessagesService } from 'app/services/messages.service';
 import { SnackbarService } from 'app/services/snackbar.service';
+import { RippleEffectDirective } from 'app/directives/ripple-effect.directive';
 
 @Component({
   selector: 'app-contact-me',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RippleEffectDirective],
   templateUrl: './contact-me.component.html',
   styleUrls: ['./contact-me.component.css'],
 })
