@@ -1,5 +1,5 @@
 .home{
-    padding-top: var(--header-height);
+    padding-top: var(--navbar-height);
     height: auto;
     position: relative;
     z-index: 2;

@@ -14,21 +14,25 @@ export class NavbarComponent implements OnInit {
   sidePanelActive: boolean = false;
   showProfileIcon: boolean = false;
   signOutDropdownActive: boolean = false;
-  sigImg!: string;
+  sigImg = new Image();
   baseSigImgPath: string = '/assets/logos/';
 
   @Input() forPage!: string;
 
-  constructor(private auth: AuthService, private themeService: ThemeService) {
-    this.themeService.isDarkMode
-      ? (this.sigImg = `${this.baseSigImgPath}sig_white.png`)
-      : (this.sigImg = `${this.baseSigImgPath}sig_darkblue.png`);
-  }
+  constructor(private auth: AuthService, private themeService: ThemeService) {}
 
   ngOnInit(): void {
     if (this.forPage == 'dashboard' && this.auth.isLoggedIn == true) {
       this.showProfileIcon = true;
     }
+
+    this.preloadImages();
+
+    this.themeService.darkMode$.subscribe((val) => {
+      this.sigImg.src = val
+        ? `${this.baseSigImgPath}sig_white.png`
+        : `${this.baseSigImgPath}sig_darkblue.png`;
+    });
   }
 
   toggleSidePanel() {
@@ -45,8 +49,10 @@ export class NavbarComponent implements OnInit {
 
   onToggleLightMode() {
     this.themeService.toggleTheme();
-    this.sigImg = this.themeService.isDarkMode
-      ? `${this.baseSigImgPath}sig_white.png`
-      : `${this.baseSigImgPath}sig_darkblue.png`;
+  }
+  
+  preloadImages() {
+    this.sigImg.src = '../../../assets/images/cauldron_light_mode.png';
+    this.sigImg.src = '../../../assets/images/cauldron.png';
   }
 }

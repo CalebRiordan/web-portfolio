@@ -1,5 +1,5 @@
 :root {
-    --header-height: 90px;
+    --navbar-height: 90px;
     --hamburger-timing-function: 0.2s ease-in-out;
     --about-me-gradient: rgba(var(--highlight-colour), 0.5) 150px, rgba(var(--highlight-colour), 0.3) 200px, rgba(var(--highlight-colour), 0.1) 400px, rgba(var(--highlight-colour), 0.03) 650px, rgb(var(--primary-colour)) 60%;
 }
@@ -14,7 +14,6 @@ body {
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
-    scroll-snap-type: Y proximity;
     overflow-y: scroll;
 }
 
@@ -24,7 +23,7 @@ html {
     font-size: 18px;
     width: 100%;
     scroll-behavior: smooth;
-    scroll-padding-top: var(--header-height);
+    scroll-padding-top: var(--navbar-height);
     box-sizing: border-box;
     background-color: rgb(var(--primary-colour));
 }
@@ -164,7 +163,7 @@ html {
     }
 
     :root {
-        --header-height: 65px;
+        --navbar-height: 65px;
     }
 
     .heading {

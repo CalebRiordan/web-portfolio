@@ -1,6 +1,6 @@
 .footer {
     background-color: rgb(var(--primary-colour));
-    height: var(--header-height);
+    height: var(--navbar-height);
     position: absolute;
     bottom: 0;
     right: 0;

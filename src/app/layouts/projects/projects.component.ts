@@ -3,15 +3,17 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  HostListener,
-  OnInit,
+  QueryList,
+  Renderer2,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Project, emptyProject } from 'app/models/project';
 import { ProjectsService } from 'app/services/projects.service';
 import { ScrollService } from 'app/services/scroll-service.service';
 import { FeaturedProjectComponent } from '../featured-project/featured-project.component';
+import { EMPTY, mergeMap, switchMap, timer } from 'rxjs';
 
 @Component({
   selector: 'app-projects',
@@ -20,7 +22,7 @@ import { FeaturedProjectComponent } from '../featured-project/featured-project.c
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css'],
 })
-export class ProjectsComponent implements OnInit, AfterViewInit {
+export class ProjectsComponent implements AfterViewInit {
   showFillerLine: boolean = false;
   projects: Project[] = [
     emptyProject,
@@ -28,25 +30,19 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
     emptyProject,
     emptyProject,
   ];
+  private currentProjectInView = 0;
+  private scrollDebounce = false;
 
   @ViewChild('projectsContainer') projContainer!: ElementRef;
-
-  @HostListener('window:scroll', ['$event']) onScrollIntoSection(event: Event) {
-    const projContainerRect =
-      this.projContainer.nativeElement.getBoundingClientRect();
-
-    if (projContainerRect.top <= window.innerHeight * 0.55 - 300) {
-      // see if the distance between the top of the screen and the bottom of first project container is less than the height of the line-filler
-      this.showFillerLine = true;
-    } else {
-      this.showFillerLine = false;
-    }
-  }
+  @ViewChild('lineFiller') lineFiller!: ElementRef;
+  @ViewChildren('linePanel') linePanels!: QueryList<ElementRef>;
+  @ViewChildren('project') projectSections!: QueryList<ElementRef>;
 
   constructor(
     private scrollService: ScrollService,
     private projService: ProjectsService,
-    private ref: ChangeDetectorRef
+    private renderer: Renderer2,
+    private cdr: ChangeDetectorRef
   ) {
     this.projService.getProjects().subscribe((res) => {
       if (res) {
@@ -59,16 +55,85 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.scrollService
-      .scrollIntoView(this.projContainer)
-      .subscribe((isInView) => {
-        if (isInView) {
-          document.documentElement.style.scrollSnapType = 'Y mandatory';
-        } else {
-          document.documentElement.style.scrollSnapType = 'Y proximity';
-        }
+    const linePanels = this.linePanels.toArray();
+
+    this.determineCurrentProject();
+
+    // Subscribe to scroll$ event observable
+    this.scrollService.scroll$
+      .pipe(
+        mergeMap(() => {
+          if (!this.projectsInView()) return EMPTY;
+
+          if (this.scrollDebounce) return EMPTY;
+
+          const i = this.currentProjectInView;
+          if (i < 3 && this.passedProjectThreshold(linePanels[i])) {
+            this.currentProjectInView++;
+            this.moveToProject(i + 1);
+            this.scrollDebounce = true;
+            return timer(300);
+          } else if (i > 0 && !this.passedProjectThreshold(linePanels[i - 1])) {
+            this.currentProjectInView--;
+            this.moveToProject(i - 1);
+            this.scrollDebounce = true;
+            return timer(300);
+          }
+
+          return EMPTY;
+        })
+      )
+      .subscribe(() => {
+        this.scrollDebounce = false;
       });
   }
 
-  ngOnInit(): void {}
+  private determineCurrentProject() {
+    if (this.projectsInView()) {
+      const linePanels = this.linePanels.toArray();
+      let i = this.currentProjectInView;
+
+      while (this.passedProjectThreshold(linePanels[i])) {
+        this.currentProjectInView++;
+        i++;
+      }
+      this.moveToProject(i + 1);
+    }
+  }
+
+  private passedProjectThreshold(linePanel: ElementRef): boolean {
+    // Determine if threshold of linePanel is below the centre of the screen
+    const threshold =
+      linePanel.nativeElement.getBoundingClientRect().top +
+      linePanel.nativeElement.offsetHeight / 4;
+
+    return threshold < window.innerHeight / 2;
+  }
+
+  private moveToProject(index: number) {
+    // Calculate new height of line filler element
+    const containerRect =
+      this.projContainer.nativeElement.getBoundingClientRect();
+    const currentProjSectionRect = this.projectSections
+      .toArray()
+      [index].nativeElement.getBoundingClientRect();
+    const line = this.lineFiller.nativeElement;
+    const newHeight = currentProjSectionRect.top - containerRect.top;
+
+    // Apply new height
+    this.renderer.setStyle(line, 'height', `${newHeight}px`);
+  }
+
+  projectsInView() {
+    const projContainerRect =
+      this.projContainer.nativeElement.getBoundingClientRect();
+    const showFillerLinePrevious = this.showFillerLine;
+    this.showFillerLine = projContainerRect.top <= window.innerHeight * 0.5;
+
+    if (this.showFillerLine != showFillerLinePrevious) {
+      this.cdr.detectChanges(); // Trigger change detection if showFillerLine changed
+    }
+
+    return this.showFillerLine;
+  }
 }
