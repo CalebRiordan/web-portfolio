@@ -72,7 +72,7 @@ export class AboutMeComponent implements OnInit, AfterViewInit {
   }
 
   preloadImages() {
-    this.lightModeImage.src = '../../../assets/images/cauldron_light_mode.png';
-    this.darkModeImage.src = '../../../assets/images/cauldron.png';
+    this.lightModeImage.src = '../../../assets/images/cauldron_light_mode.webp';
+    this.darkModeImage.src = '../../../assets/images/cauldron.webp';
   }
 }

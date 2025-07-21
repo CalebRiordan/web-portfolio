@@ -70,11 +70,14 @@ export class FeaturedProjectComponent
   }
 
   ngAfterViewInit(): void {
-    this.scrollService.scroll$.pipe(throttleTime(100)).subscribe(() => {
+    // Track if project is in view after user scrolls
+    this.scrollService.scroll$.subscribe(() => {
+      const rect = this.thumbnail.nativeElement.getBoundingClientRect();
+      const threshold = this.isMobileScreen ? rect.bottom : rect.top;
+        // ? this.thumbnail.nativeElement.getBoundingClientRect().bottom
+        // : this.content.nativeElement.getBoundingClientRect().top;
       setTimeout(() => {
-      this.inView =
-        this.content.nativeElement.getBoundingClientRect().top <
-        window.innerHeight;
+        this.inView = threshold < window.innerHeight;
       }, 300);
     });
 

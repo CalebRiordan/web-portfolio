@@ -78,7 +78,7 @@ export class ProjectsComponent implements AfterViewInit {
       const linePanels = this.linePanels.toArray();
       let i = this.currentProjectInView;
 
-      while (this.passedProjectThreshold(linePanels[i])) {
+      while (i < 3 && this.passedProjectThreshold(linePanels[i])) {
         this.currentProjectInView++;
         i++;
       }
@@ -90,12 +90,16 @@ export class ProjectsComponent implements AfterViewInit {
     const linePanels = this.linePanels.toArray();
     const i = this.currentProjectInView;
 
+    // Should move to next project?
     if (i < 3 && this.passedProjectThreshold(linePanels[i])) {
       this.currentProjectInView++;
       this.moveToProject(i + 1);
       this.scrollDebounce = true;
       return true;
-    } else if (i > 0 && !this.passedProjectThreshold(linePanels[i - 1])) {
+    } 
+    
+    // Should move to previous project?
+    if (i > 0 && !this.passedProjectThreshold(linePanels[i - 1])) {
       this.currentProjectInView--;
       this.moveToProject(i - 1);
       this.scrollDebounce = true;
