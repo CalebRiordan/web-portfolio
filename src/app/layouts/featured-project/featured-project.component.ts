@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  HostListener,
   Input,
   OnChanges,
   OnDestroy,
@@ -15,7 +14,7 @@ import { CommonModule } from '@angular/common';
 import { Project, emptyProject } from 'app/models/project';
 import { RippleEffectDirective } from 'app/directives/ripple-effect.directive';
 import { ResizeService } from 'app/services/resize.service';
-import { Subscription } from 'rxjs';
+import { Subscription, throttleTime } from 'rxjs';
 import { ScrollService } from 'app/services/scroll-service.service';
 
 @Component({
@@ -71,7 +70,13 @@ export class FeaturedProjectComponent
   }
 
   ngAfterViewInit(): void {
-    this.scrollService.scroll$.subscribe()
+    this.scrollService.scroll$.pipe(throttleTime(100)).subscribe(() => {
+      setTimeout(() => {
+      this.inView =
+        this.content.nativeElement.getBoundingClientRect().top <
+        window.innerHeight;
+      }, 300);
+    });
 
     // Set scroll snapping on each project
     this.scrollService.setScrollSnap(
@@ -118,7 +123,7 @@ export class FeaturedProjectComponent
         year: 'numeric',
       });
     }
-    
+
     return '';
   }
 

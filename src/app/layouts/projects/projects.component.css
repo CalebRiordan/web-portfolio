@@ -27,7 +27,7 @@
     width: 100%;
     background-color: rgb(var(--highlight-colour));
     z-index: 1;
-    transition: height 0.5s ease;
+    transition: height 0.4s ease;
 }
 
 .project {

@@ -11,7 +11,6 @@ import { SkillsComponent } from '../skills/skills.component';
 import { ThemeService } from 'app/services/theme.service';
 import { RippleEffectDirective } from 'app/directives/ripple-effect.directive';
 import { ScrollService } from 'app/services/scroll-service.service';
-import { ContentObserver } from '@angular/cdk/observers';
 
 @Component({
   selector: 'app-about-me',

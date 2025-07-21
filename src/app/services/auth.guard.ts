@@ -14,7 +14,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     return true;
   } else {
     router.navigate(['admin/login']);
-    sbService.generateSnackbar("Please log in before accessing the dashboard");
+    sbService.snackbar("Please log in before accessing the dashboard");
 
     return false;
   }

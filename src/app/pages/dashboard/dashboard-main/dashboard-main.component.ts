@@ -77,7 +77,7 @@ export class DashboardMainComponent implements OnInit {
           if (res.status == 200) {
             window.location.reload();
 
-            this.sbService.generateSnackbar('Message deleted');
+            this.sbService.snackbar('Message deleted');
           }
         });
       }

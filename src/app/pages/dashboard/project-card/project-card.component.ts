@@ -81,7 +81,7 @@ export class ProjectCardComponent implements OnInit, AfterViewInit {
         this.projService.deleteProject(this.projNum).subscribe((res) => {
           if (res.status == 200) {
             window.location.reload();
-            this.sbService.generateSnackbar('Project deleted!');
+            this.sbService.snackbar('Project deleted!');
           }
         });
       }

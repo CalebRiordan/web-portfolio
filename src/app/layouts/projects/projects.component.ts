@@ -13,7 +13,7 @@ import { Project, emptyProject } from 'app/models/project';
 import { ProjectsService } from 'app/services/projects.service';
 import { ScrollService } from 'app/services/scroll-service.service';
 import { FeaturedProjectComponent } from '../featured-project/featured-project.component';
-import { EMPTY, mergeMap, switchMap, timer } from 'rxjs';
+import { EMPTY, mergeMap, timer } from 'rxjs';
 
 @Component({
   selector: 'app-projects',
@@ -23,6 +23,8 @@ import { EMPTY, mergeMap, switchMap, timer } from 'rxjs';
   styleUrls: ['./projects.component.css'],
 })
 export class ProjectsComponent implements AfterViewInit {
+  private currentProjectInView = 0;
+  private scrollDebounce = false;
   showFillerLine: boolean = false;
   projects: Project[] = [
     emptyProject,
@@ -30,8 +32,6 @@ export class ProjectsComponent implements AfterViewInit {
     emptyProject,
     emptyProject,
   ];
-  private currentProjectInView = 0;
-  private scrollDebounce = false;
 
   @ViewChild('projectsContainer') projContainer!: ElementRef;
   @ViewChild('lineFiller') lineFiller!: ElementRef;
@@ -55,32 +55,17 @@ export class ProjectsComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const linePanels = this.linePanels.toArray();
-
     this.determineCurrentProject();
 
     // Subscribe to scroll$ event observable
     this.scrollService.scroll$
       .pipe(
         mergeMap(() => {
-          if (!this.projectsInView()) return EMPTY;
-
-          if (this.scrollDebounce) return EMPTY;
-
-          const i = this.currentProjectInView;
-          if (i < 3 && this.passedProjectThreshold(linePanels[i])) {
-            this.currentProjectInView++;
-            this.moveToProject(i + 1);
-            this.scrollDebounce = true;
-            return timer(300);
-          } else if (i > 0 && !this.passedProjectThreshold(linePanels[i - 1])) {
-            this.currentProjectInView--;
-            this.moveToProject(i - 1);
-            this.scrollDebounce = true;
-            return timer(300);
-          }
-
-          return EMPTY;
+          return !this.scrollDebounce &&
+            this.projectsInView() &&
+            this.moveToAdjacentProject()
+            ? timer(300)
+            : EMPTY;
         })
       )
       .subscribe(() => {
@@ -97,8 +82,27 @@ export class ProjectsComponent implements AfterViewInit {
         this.currentProjectInView++;
         i++;
       }
-      this.moveToProject(i + 1);
+      this.moveToProject(i);
     }
+  }
+
+  private moveToAdjacentProject() {
+    const linePanels = this.linePanels.toArray();
+    const i = this.currentProjectInView;
+
+    if (i < 3 && this.passedProjectThreshold(linePanels[i])) {
+      this.currentProjectInView++;
+      this.moveToProject(i + 1);
+      this.scrollDebounce = true;
+      return true;
+    } else if (i > 0 && !this.passedProjectThreshold(linePanels[i - 1])) {
+      this.currentProjectInView--;
+      this.moveToProject(i - 1);
+      this.scrollDebounce = true;
+      return true;
+    }
+
+    return false;
   }
 
   private passedProjectThreshold(linePanel: ElementRef): boolean {

@@ -1,79 +1,96 @@
 <div class="contact-me-section scroll-offset">
-  <div class="contact-me-card" id="contact-me">
-    <div class="heading">Contact Me</div>
-    <div #innerCard class="inner-card" [ngClass]="{ 'form-processing': formProcessing }">
+  <div #contactMeCard class="contact-me-card" id="contact-me">
+    <div class="heading contact-me-heading">Contact Me</div>
+    <div
+      class="inner-card"
+      [ngClass]="{ 'form-processing': formProcessing }"
+    >
       <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-        <div class="grid-layout text-white">
+        <div class="grid-layout">
+          <!-- Left side -->
           <div
-            class="grid-item-1"
+            class="grid-item grid-item-1"
             [ngClass]="{ 'form-processing': formProcessing }"
           >
-            <div class="field-tag">Name</div>
-            <input
-              type="text"
-              class="field"
-              formControlName="name"
-              [ngClass]="{
-                'is-invalid': fc['name'].touched && fc['name'].invalid
-              }"
-            />
-            <div
-              class="input-invalid"
-              *ngIf="fc['name'].errors?.['required'] && fc['name'].touched"
-            >
-              Your name is required
+            <!-- Name Input -->
+            <div class="input-group">
+              <div class="field-tag">Name</div>
+              <input
+                type="text"
+                class="field"
+                formControlName="name"
+                [ngClass]="{
+                  'is-invalid': fc['name'].touched && fc['name'].invalid
+                }"
+              />
+              <div
+                class="input-invalid"
+                *ngIf="fc['name'].errors?.['required'] && fc['name'].touched"
+              >
+                Your name is required
+              </div>
             </div>
-            <br /><br />
-            <div class="field-tag email-field">Email</div>
-            <input
-              type="email"
-              class="field"
-              formControlName="email"
-              [ngClass]="{
-                'is-invalid': fc['email'].touched && fc['email'].invalid
-              }"
-            />
-            <div
-              class="input-invalid"
-              *ngIf="fc['email'].errors?.['required'] && fc['email'].touched"
-            >
-              Your email is required
-            </div>
-            <div
-              class="input-invalid"
-              *ngIf="fc['email'].errors?.['email'] && fc['email'].touched"
-            >
-              Invalid email format
+
+            <!-- Email Input -->
+            <div class="input-group">
+              <div class="field-tag email-field">Email</div>
+              <input
+                type="email"
+                class="field"
+                formControlName="email"
+                [ngClass]="{
+                  'is-invalid': fc['email'].touched && fc['email'].invalid
+                }"
+              />
+              <div
+                class="input-invalid"
+                *ngIf="fc['email'].errors?.['required'] && fc['email'].touched"
+              >
+                Your email is required
+              </div>
+              <div
+                class="input-invalid"
+                *ngIf="fc['email'].errors?.['email'] && fc['email'].touched"
+              >
+                Invalid email format
+              </div>
             </div>
           </div>
-          <div class="grid-item-2 flex-col my-details">
-            <div class="flex-item">Caleb Andrew Riordan</div>
-            <div class="flex-item">Western Cape<br />South Africa</div>
-            <div class="flex-item">
+
+          <!-- Left Side -->
+          <div class="grid-item grid-item-2 contact-details">
+            <div>Caleb Andrew Riordan</div>
+            <div>Western Cape<br />South Africa</div>
+            <div>
               Cel: +27 084 656 3352<br />caleb2003riordan&#64;gmail.com
             </div>
           </div>
+
+          <!-- Bottom -->
           <div
-            class="grid-item-3"
+            class="grid-item grid-item-3"
             [ngClass]="{ 'form-processing': formProcessing }"
           >
-            <div class="field-tag message-field">Message</div>
-            <textarea
-              class="field"
-              formControlName="message"
-              [ngClass]="{
-                'is-invalid': fc['message'].touched && fc['message'].invalid
-              }"
-            ></textarea>
-            <div
-              class="input-invalid-textarea"
-              *ngIf="fc['message'].errors?.['required'] && fc['message'].touched"
-            >
-              A message is required
+            <div class="input-group">
+              <div class="field-tag message-field">Message</div>
+              <textarea
+                class="field"
+                formControlName="message"
+                [ngClass]="{
+                  'is-invalid': fc['message'].touched && fc['message'].invalid
+                }"
+              ></textarea>
+              <div
+                class="input-invalid"
+                *ngIf="fc['message'].errors?.['required'] && fc['message'].touched"
+              >
+                A message is required
+              </div>
             </div>
           </div>
         </div>
-        <button class="button" [disabled]="contactForm.invalid" appRippleEffect>
+
+        <button class="button" [disabled]="contactForm.invalid || formProcessing || onCooldown" appRippleEffect>
           Submit
         </button>
       </form>

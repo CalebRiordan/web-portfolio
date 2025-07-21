@@ -128,7 +128,7 @@ export class EditProjectComponent implements OnInit {
         .subscribe((res) => {
           this.formProcessing = false;
           this.router.navigate(['admin/dashboard']);
-          this.sbService.generateSnackbar('Project udpated!');
+          this.sbService.snackbar('Project udpated!');
         });
     } else if (this.pagePurpose == 'add') {
       //Add new project to database using projService
@@ -138,7 +138,7 @@ export class EditProjectComponent implements OnInit {
           this.formProcessing = false;
           //redirect
           this.router.navigate(['admin/dashboard']);
-          this.sbService.generateSnackbar('Project added!');
+          this.sbService.snackbar('Project added!');
         });
     }
   }

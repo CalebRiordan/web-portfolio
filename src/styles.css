@@ -70,7 +70,7 @@ html {
     color: grey;
 }
 
-.ripple-effect{
+.ripple-effect {
     position: relative;
 }
 
@@ -84,6 +84,28 @@ html {
     transform: translate(-50%, -50%);
     transform: 0.3s;
     animation: ripple 0.3s linear;
+}
+
+.snackbar {
+    color: rgb(var(--text-colour));
+    background-color: rgb(var(--primary-colour));
+    font-family: 'Poppins', 'Segoe UI', 'Verdana', sans-serif; 
+    font-size: 1.3rem;
+
+    button {
+        background-color: rgb(var(--primary-colour));
+        color: rgb(var(--highlight-colour));
+        font-family: inherit;
+    }
+
+    button:hover {
+        filter: brightness(90%);
+    }
+}
+
+.snackbar.sb-error {
+    color: rgb(220, 53, 69);
+    font-weight: bold;
 }
 
 @keyframes ripple {
@@ -127,25 +149,19 @@ html {
 
 /* MEDIA QUERIES */
 
-@media only screen and (max-width: 1550px){
+@media only screen and (max-width: 1550px) {
     html {
         font-size: 17px;
     }
 }
 
-@media only screen and (max-width: 1375px){
+@media only screen and (max-width: 1300px) {
     html {
         font-size: 16px;
     }
 }
 
-@media only screen and (max-width: 1200px){
-    html {
-        font-size: 15px;
-    }
-}
-
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 1050px) {
     html {
         font-size: 14px;
     }
@@ -167,7 +183,7 @@ html {
     }
 
     .heading {
-        font-size: 2.8em;
+        font-size: 2.4em;
         font-weight: bold;
     }
 }
