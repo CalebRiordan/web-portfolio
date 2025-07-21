@@ -246,7 +246,7 @@
 
     .about-me-section {
         background: radial-gradient(circle at 140% 20em, var(--about-me-gradient));
-        padding-top: 130px;
+        padding-top: 7.5rem;
     }
 
     .recipe-image-grid {
@@ -254,7 +254,11 @@
     }
 
     .recipe {
-        margin-left: 1rem;
+        margin-left: 1.2rem;
+    }
+
+    .recipe-title {
+        padding-left: 0.5rem;
     }
 
     .underline {
@@ -275,11 +279,11 @@
     }
 
     .introduction h1 {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
     }
 
     .introduction p {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
     }
 
     .content br {

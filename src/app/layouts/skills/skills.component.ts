@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   HostListener,
+  numberAttribute,
   OnDestroy,
   QueryList,
   Renderer2,
@@ -78,6 +79,10 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
     // Fade out
     this.renderer.addClass(skillsEl, 'fade');
     this.renderer.addClass(skillsEl, 'no-transform-transition');
+      
+    // Calculate skills section hovered height
+      const numRows = Math.round(this.skills.toArray().length / this.numActiveItems);
+      this.renderer.setStyle(skillsEl, 'height', `${numRows * 12}rem`);
 
     setTimeout(() => {
       // Change styles
@@ -97,6 +102,7 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
     setTimeout(() => {
       // Change styles
       this.renderer.removeClass(skillsEl, 'hovered');
+      this.renderer.removeStyle(skillsEl, 'height');
       this.updateCarouselMeasurements();
 
       // Fade in
