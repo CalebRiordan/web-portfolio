@@ -2,8 +2,6 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  HostListener,
-  numberAttribute,
   OnDestroy,
   QueryList,
   Renderer2,
@@ -63,7 +61,7 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
 
     // Update number of items visible on carousel
     this.layoutSubscription = this.resizer.isSmallLayout$.subscribe(
-      (isMobileLayout) => {        
+      (isMobileLayout) => {
         this.numActiveItems = isMobileLayout ? 3 : 4;
         this.setCarouselState(this.rotationOffset);
         this.setCarouselTimer();
@@ -79,10 +77,12 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
     // Fade out
     this.renderer.addClass(skillsEl, 'fade');
     this.renderer.addClass(skillsEl, 'no-transform-transition');
-      
+
     // Calculate skills section hovered height
-      const numRows = Math.round(this.skills.toArray().length / this.numActiveItems);
-      this.renderer.setStyle(skillsEl, 'height', `${numRows * 12}rem`);
+    const numRows = Math.round(
+      this.skills.toArray().length / this.numActiveItems
+    );
+    this.renderer.setStyle(skillsEl, 'height', `${numRows * 12}rem`);
 
     setTimeout(() => {
       // Change styles
@@ -123,11 +123,10 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
   }
 
   updateCarouselMeasurements() {
-    // Adjust skills measurements    
+    // Adjust skills measurements
     this.carouselWidth = this.skillsContainer.nativeElement.clientWidth;
     this.skillPadding = this.carouselWidth * 0.02;
-    this.skillWidth =
-      this.carouselWidth * (1 / this.numActiveItems - 2 * 0.02);
+    this.skillWidth = this.carouselWidth * (1 / this.numActiveItems - 2 * 0.02);
 
     // Apply new measurements to elements
     this.skills.forEach((skill: ElementRef) => {
@@ -191,7 +190,10 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
     this.renderer.addClass(elapsedSkill, 'hide');
     this.renderer.setStyle(elapsedSkill, 'transform', `translateX(0)`);
     elapsedSkill.offsetHeight; // Trigger reflow to ensure styles are applied immediately
-    this.renderer.removeClass(elapsedSkill, 'hide');
+
+    setTimeout(() => {
+      this.renderer.removeClass(elapsedSkill, 'hide');
+    }, 100);
 
     // Rotate skills
     skillsToRotate.forEach((skill: ElementRef, i: number) => {

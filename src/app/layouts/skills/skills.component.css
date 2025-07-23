@@ -71,6 +71,7 @@
     align-items: center;
     text-align: center;
     transition: opacity 0.15s ease-out, transform 0.5s ease;
+    overflow: hidden;
 }
 
 .skill.hide {
@@ -81,7 +82,9 @@
 .skill p {
     color: rgb(var(--text-colour));
     font-size: 1.8rem;
+    width: 92%;
     margin: 0;
+    overflow: hidden;
 }
 
 .skills.hovered .skill:hover {
@@ -148,7 +151,7 @@
     }
 
     .skill p {
-        font-size: 1.8em;
+        font-size: 1.6em;
         margin-top: 7px;
     }
 
