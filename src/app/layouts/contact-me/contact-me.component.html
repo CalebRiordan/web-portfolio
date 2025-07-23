@@ -1,10 +1,7 @@
 <div class="contact-me-section scroll-offset">
   <div #contactMeCard class="contact-me-card" id="contact-me">
     <div class="heading contact-me-heading">Contact Me</div>
-    <div
-      class="inner-card"
-      [ngClass]="{ 'form-processing': formProcessing }"
-    >
+    <div class="inner-card" [ngClass]="{ 'form-processing': formProcessing }">
       <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
         <div class="grid-layout">
           <!-- Left side -->
@@ -25,7 +22,7 @@
               />
               <div
                 class="input-invalid"
-                *ngIf="fc['name'].errors?.['required'] && fc['name'].touched"
+                [hidden]="!(fc['name'].errors?.['required'] && fc['name'].touched)"
               >
                 Your name is required
               </div>
@@ -44,26 +41,18 @@
               />
               <div
                 class="input-invalid"
-                *ngIf="fc['email'].errors?.['required'] && fc['email'].touched"
+                [hidden]="!((fc['email'].errors?.['required'] || fc['email'].errors?.['email']) && fc['email'].touched)"
               >
-                Your email is required
-              </div>
-              <div
-                class="input-invalid"
-                *ngIf="fc['email'].errors?.['email'] && fc['email'].touched"
-              >
-                Invalid email format
+                {{ fc['email'].errors?.['required'] ? "Your email is required" : "Invalid email format" }}
               </div>
             </div>
           </div>
 
-          <!-- Left Side -->
+          <!-- Right Side -->
           <div class="grid-item grid-item-2 contact-details">
             <div>Caleb Andrew Riordan</div>
             <div>Western Cape<br />South Africa</div>
-            <div>
-              Cel: +27 084 656 3352<br />caleb2003riordan&#64;gmail.com
-            </div>
+            <div>Cell: +27 084 656 3352<br />caleb2003riordan&#64;gmail.com</div>
           </div>
 
           <!-- Bottom -->
@@ -82,7 +71,7 @@
               ></textarea>
               <div
                 class="input-invalid"
-                *ngIf="fc['message'].errors?.['required'] && fc['message'].touched"
+                [hidden]="!(fc['message'].errors?.['required'] && fc['message'].touched)"
               >
                 A message is required
               </div>
@@ -90,7 +79,11 @@
           </div>
         </div>
 
-        <button class="button" [disabled]="contactForm.invalid || formProcessing || onCooldown" appRippleEffect>
+        <button
+          class="button"
+          [disabled]="contactForm.invalid || formProcessing || onCooldown"
+          appRippleEffect
+        >
           Submit
         </button>
       </form>
