@@ -18,9 +18,10 @@
 
 ## Angular + Typescript + ASP.NET
 
-The frontend of the portfolio website was developed with [Angular](https://angular.io/guide/what-is-angular) for versatile DOM manipulation features and combined with a blend of [Typescript](https://thenewstack.io/what-is-typescript/), [HTML](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics), and [CSS](https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps/What_is_CSS). It interacts with a [C#](https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/) [ASP.NET](https://dotnet.microsoft.com/en-us/learn/aspnet/what-is-aspnet) API, which utilizes the [Entity Framework Core](https://www.entityframeworktutorial.net/entityframework6/what-is-entityframework.aspx) toolset for seamless communication with the database hosted through [Microsoft's Azure Cloud Services](https://www.techtarget.com/searchcloudcomputing/definition/Windows-Azure), ensuring efficient data interactions.
+This modern single-page application comprises an [Angular](https://angular.io/guide/what-is-angular) frontend and a [C#](https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/) [ASP.NET](https://dotnet.microsoft.com/en-us/learn/aspnet/what-is-aspnet) backend API, offering versatile DOM manipulation features with backend scalability and modularity. [Typescript](https://thenewstack.io/what-is-typescript/), [HTML](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics), and [CSS](https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps/What_is_CSS) control the frontend, while the ASP.NET API utilizes [Entity Framework Core](https://www.entityframeworktutorial.net/entityframework6/what-is-entityframework.aspx) ORM for seamless communication with the MySQL database hosted on the cloud. There is also a restricted dashboard for updating my projects and viewing messages sent via the Contact Me form.
 
-The API offers basic CRUD (Create, Read, Update, Delete) functionality for data related to my personal projects. There is also a dashboard that can be accessed only by the owner of the application, the code for which has been included in the repository to help present the scope of this project more accurately.
+The API offers basic CRUD (Create, Read, Update, Delete) functionality for data related to my personal projects. 
+<strong>PLEASE NOTE</strong>: The API is currently taken down as the database must be migrated to a hosting platform that doesn't start charging me without warning.  
 
 #
 
