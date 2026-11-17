@@ -60,8 +60,8 @@
               "namedChunks": true,
               "fileReplacements": [
                 {
-                  "replace": "src/environment.ts", 
-                  "with": "src/environment.dev.ts" 
+                  "replace": "src/environment.ts",
+                  "with": "src/environment.dev.ts"
                 }
               ]
             }
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "webfolio-app:build:production"
+              "browserTarget": "webfolio-app:build:production"
             },
             "development": {
-              "buildTarget": "webfolio-app:build:development"
+              "browserTarget": "webfolio-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "webfolio-app:build"
+            "browserTarget": "webfolio-app:build"
           }
         }
       }
