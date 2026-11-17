@@ -15,7 +15,7 @@ body {
 }
 
 .background-panel{
-    padding-top: var(--header-height);
+    padding-top: var(--navbar-height);
     width: 100%;
     height: auto;
 }
@@ -59,7 +59,7 @@ body {
     margin: 0;
     padding: 0;
     height: auto;
-    min-height: calc(100vh - var(--header-height) - 680px);
+    min-height: calc(100vh - var(--navbar-height) - 680px);
     align-items: center;
     box-sizing: border-box;
     overflow: hidden;

@@ -1,18 +1,17 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CreateProjectModel, Project, emptyProject } from 'src/app/models/project';
-import { DataService } from 'src/app/services/data.service';
-import { ProjectsService } from 'src/app/services/projects.service';
-import { SnackbarService } from 'src/app/services/snackbar.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { CreateProjectModel, Project, emptyProject } from 'app/models/project';
+import { DataService } from 'app/services/data.service';
+import { ProjectsService } from 'app/services/projects.service';
+import { SnackbarService } from 'app/services/snackbar.service';
+import { RippleEffectDirective } from 'app/directives/ripple-effect.directive';
 
 @Component({
   selector: 'app-edit-project',
+  standalone: true,
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, RippleEffectDirective],
   templateUrl: './edit-project.component.html',
   styleUrls: ['./edit-project.component.css'],
 })
@@ -37,7 +36,7 @@ export class EditProjectComponent implements OnInit {
     private projectService: ProjectsService,
     private sbService: SnackbarService
   ) {
-    this.setupForm();    
+    this.setupForm();
   }
 
   ngOnInit(): void {
@@ -51,11 +50,11 @@ export class EditProjectComponent implements OnInit {
           this.project = this.dataService.projData;
 
           //if a thumbnail already exists, the project was completed already and there is no need to update the completion date
-          if (this.project.thumbnailUrl != ''){
+          if (this.project.thumbnailUrl != '') {
             this.alreadyCompleted = true;
           }
         }
-        
+
         this.editProjectForm.setValue({
           name: this.project.name,
           description: this.project.description,
@@ -63,18 +62,18 @@ export class EditProjectComponent implements OnInit {
           githubLink: this.project.githubLink,
           demoLink: this.project.demoLink,
         });
-        this.imgSrc = this.project.thumbnailUrl;        
+        this.imgSrc = this.project.thumbnailUrl;
       })
       .unsubscribe();
   }
 
   setupForm() {
     this.editProjectForm = this.fb.group({
-      name: ["", [Validators.required, Validators.maxLength(25)]],
-      description: ["", [Validators.required, Validators.maxLength(185)]],
-      thumbnail: [""],
-      githubLink: [""],
-      demoLink: [""],
+      name: ['', [Validators.required, Validators.maxLength(25)]],
+      description: ['', [Validators.required, Validators.maxLength(185)]],
+      thumbnail: [''],
+      githubLink: [''],
+      demoLink: [''],
     });
   }
 
@@ -100,17 +99,19 @@ export class EditProjectComponent implements OnInit {
   }
 
   onSubmit() {
-    this.formProcessing = true;    
+    this.formProcessing = true;
 
     let newProjectModel = {} as CreateProjectModel;
     let newThumbnail: File | undefined = undefined;
-    let dateCompleted: string = "";
+    let dateCompleted: string = '';
 
     if (this.selectedImg) {
       newThumbnail = this.selectedImg;
       //A thumbnail being added means the project has just been completed, and therefore the dateCompleted will be the current data unless it was already completed before
     }
-    this.alreadyCompleted ? dateCompleted = this.project.dateCompleted : dateCompleted = new Date().toISOString().slice(0, 10);
+    this.alreadyCompleted
+      ? (dateCompleted = this.project.dateCompleted)
+      : (dateCompleted = new Date().toISOString().slice(0, 10));
 
     newProjectModel = {
       name: this.fcv('name'),
@@ -119,24 +120,26 @@ export class EditProjectComponent implements OnInit {
       dateCompleted: dateCompleted,
       githubLink: this.fcv('githubLink'),
       demoLink: this.fcv('demoLink'),
-    };  
+    };
 
-    if (this.pagePurpose == 'edit'){
-      
-      this.projectService.updateProject(newProjectModel, this.projNum).subscribe(res => {
-        this.formProcessing = false;
-        this.router.navigate(['admin/dashboard']);
-        this.sbService.generateSnackbar("Project udpated!");
-      });
-
-    } else if (this.pagePurpose == 'add'){
+    if (this.pagePurpose == 'edit') {
+      this.projectService
+        .updateProject(newProjectModel, this.projNum)
+        .subscribe((res) => {
+          this.formProcessing = false;
+          this.router.navigate(['admin/dashboard']);
+          this.sbService.snackbar('Project udpated!');
+        });
+    } else if (this.pagePurpose == 'add') {
       //Add new project to database using projService
-      this.projectService.addProject(newProjectModel, this.projNum).subscribe(res => {
-      this.formProcessing = false;
-      //redirect
-      this.router.navigate(['admin/dashboard']);
-      this.sbService.generateSnackbar("Project added!");
-      });
+      this.projectService
+        .addProject(newProjectModel, this.projNum)
+        .subscribe((res) => {
+          this.formProcessing = false;
+          //redirect
+          this.router.navigate(['admin/dashboard']);
+          this.sbService.snackbar('Project added!');
+        });
     }
   }
 }

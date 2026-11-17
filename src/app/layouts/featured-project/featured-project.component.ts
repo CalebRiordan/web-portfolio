@@ -1,22 +1,34 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
-  HostListener,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Renderer2,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { Project, emptyProject } from 'src/app/models/project';
+import { CommonModule } from '@angular/common';
+import { Project, emptyProject } from 'app/models/project';
+import { RippleEffectDirective } from 'app/directives/ripple-effect.directive';
+import { ResizeService } from 'app/services/resize.service';
+import { Subscription, throttleTime } from 'rxjs';
+import { ScrollService } from 'app/services/scroll-service.service';
 
 @Component({
   selector: 'app-featured-project',
+  standalone: true,
+  imports: [CommonModule, RippleEffectDirective],
   templateUrl: './featured-project.component.html',
   styleUrls: ['./featured-project.component.css'],
 })
-export class FeaturedProjectComponent implements OnInit, OnChanges {
+export class FeaturedProjectComponent
+  implements OnInit, OnChanges, OnDestroy, AfterViewInit
+{
+  private layoutSubscription!: Subscription;
+
   inView: boolean = false;
   projOdd: Boolean = false;
   projectData!: Project;
@@ -31,28 +43,15 @@ export class FeaturedProjectComponent implements OnInit, OnChanges {
   @ViewChild('projectDisplay') content!: ElementRef;
   @ViewChild('thumbnail') thumbnail!: ElementRef;
 
-  @HostListener('window:scroll', ['$event']) onScrollIntoView(event: Event) {
-    // check if content is in view and update 'inView' variable
-    const windowHeight = window.innerHeight;
-    const elementRect = this.content.nativeElement.getBoundingClientRect();
-
-    const elementInView = elementRect.bottom <= windowHeight;
-
-    if (elementInView) {
-      this.inView = true;
-    } else {
-      this.inView = false;
-    }
+  constructor(
+    private renderer: Renderer2,
+    private resizer: ResizeService,
+    private scrollService: ScrollService
+  ) {
+    this.layoutSubscription = this.resizer.isSmallLayout$.subscribe(
+      (value) => (this.isMobileScreen = value)
+    );
   }
-
-  @HostListener('window:resize', ['$event']) onWindowResize() {
-    this.winWidth = window.innerWidth;
-    this.winWidth <= 820
-      ? (this.isMobileScreen = true)
-      : (this.isMobileScreen = false);
-  }
-
-  constructor(private renderer: Renderer2) {}
 
   ngOnInit(): void {
     this.projNum = this.projInfo[0];
@@ -67,9 +66,29 @@ export class FeaturedProjectComponent implements OnInit, OnChanges {
 
     this.projOdd = this.projNum % 2 == 1;
     this.winWidth = window.innerWidth;
-    this.winWidth <= 820
-      ? (this.isMobileScreen = true)
-      : (this.isMobileScreen = false);
+    this.isMobileScreen = this.winWidth <= 820;
+  }
+
+  ngAfterViewInit(): void {
+    // Track if project is in view after user scrolls
+    this.scrollService.scroll$.subscribe(() => {
+      const rect = this.thumbnail.nativeElement.getBoundingClientRect();
+      const threshold = this.isMobileScreen ? rect.bottom : rect.top;
+        // ? this.thumbnail.nativeElement.getBoundingClientRect().bottom
+        // : this.content.nativeElement.getBoundingClientRect().top;
+      setTimeout(() => {
+        this.inView = threshold < window.innerHeight;
+      }, 300);
+    });
+
+    // Set scroll snapping on each project
+    this.scrollService.setScrollSnap(
+      this.content,
+      120,
+      ScrollService.Anchor.CENTRE,
+      -this.content.nativeElement.offsetHeight / 2,
+      true
+    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -101,14 +120,14 @@ export class FeaturedProjectComponent implements OnInit, OnChanges {
     if (inputDate != '') {
       const dateObject = new Date(inputDate);
 
-      const formattedDate = dateObject.toLocaleDateString('en-US', {
+      return dateObject.toLocaleDateString('en-US', {
         day: '2-digit',
         month: 'short',
         year: 'numeric',
       });
+    }
 
-      return formattedDate;
-    } else return '';
+    return '';
   }
 
   onOpenRepo() {
@@ -117,5 +136,9 @@ export class FeaturedProjectComponent implements OnInit, OnChanges {
 
   onOpenDemo() {
     window.open(this.projectData.demoLink, '_blank');
+  }
+
+  ngOnDestroy(): void {
+    this.layoutSubscription.unsubscribe();
   }
 }

@@ -1,8 +1,6 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener } from '@angular/core';
 
-@Directive({
-  selector: '[appRippleEffect]'
-})
+@Directive({ selector: '[appRippleEffect]' })
 export class RippleEffectDirective {
 
   constructor(private el: ElementRef) { }

@@ -1,56 +1,49 @@
-:root{
-    --header-height: 90px;
+:root {
+    --navbar-height: 90px;
     --hamburger-timing-function: 0.2s ease-in-out;
     --about-me-gradient: rgba(var(--highlight-colour), 0.5) 150px, rgba(var(--highlight-colour), 0.3) 200px, rgba(var(--highlight-colour), 0.1) 400px, rgba(var(--highlight-colour), 0.03) 650px, rgb(var(--primary-colour)) 60%;
 }
 
-.shadow-bottom{
+.shadow-bottom {
     box-shadow: 0px, 4px, 2px, -2px black;
 }
 
-body{
+body {
     margin: 0;
     padding: 0;
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
-    scroll-snap-type: Y proximity;
     overflow-y: scroll;
-}
-
-.logo{
-    width: 100px;
 }
 
 html {
     margin: 0;
     padding: 0;
+    font-size: 18px;
     width: 100%;
     scroll-behavior: smooth;
-    scroll-padding-top: var(--header-height);
+    scroll-padding-top: var(--navbar-height);
     box-sizing: border-box;
+    background-color: rgb(var(--primary-colour));
 }
 
 .scroll-offset {
     scroll-margin-top: 100px;
 }
 
-.heading{
-    padding: 20px 0;
-    font-size: 64px;
+.heading {
+    padding: 1rem 0;
+    font-size: 3.5rem;
     font-weight: 700;
-   color: rgb(var(--text-colour));
+    color: rgb(var(--text-colour));
 }
 
-.background-panel{
+.background-panel {
     background-color: rgb(var(--primary-colour));
     margin: 0;
     width: 100%;
     height: auto;
-}
-
-.space{
-    height: 1000px;
 }
 
 .container-relative {
@@ -59,15 +52,12 @@ html {
 }
 
 .button {
-    position: relative;
-    width: 5em;
-    height: auto;
-    padding: 5px;
     background-color: transparent;
     border: 2px solid rgb(var(--highlight-colour));
-    border-radius: 5em;
-    font-size: 32px;
-   color: rgb(var(--text-colour));
+    border-radius: 5rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 1.8rem;
+    color: rgb(var(--text-colour));
     overflow: hidden;
 }
 
@@ -75,16 +65,20 @@ html {
     background-color: rgba(var(--highlight-colour), 0.4);
 }
 
-.button:disabled{
+.button:disabled {
     border-color: grey;
     color: grey;
 }
 
-.ripple-effect:after {
+.ripple-effect {
+    position: relative;
+}
+
+.ripple-effect::after {
     content: "";
     position: absolute;
     border-radius: 50%;
-    background-color: rgba(var(--highlight-colour), 0.4);
+    background-color: rgba(var(--highlight-colour), 0.5);
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -92,39 +86,62 @@ html {
     animation: ripple 0.3s linear;
 }
 
-@keyframes ripple { 
+.snackbar {
+    color: rgb(var(--text-colour));
+    background-color: rgb(var(--primary-colour));
+    font-family: 'Poppins', 'Segoe UI', 'Verdana', sans-serif; 
+    font-size: 1.3rem;
+
+    button {
+        background-color: rgb(var(--primary-colour));
+        color: rgb(var(--highlight-colour));
+        font-family: inherit;
+    }
+
+    button:hover {
+        filter: brightness(90%);
+    }
+}
+
+.snackbar.sb-error {
+    color: rgb(220, 53, 69);
+    font-weight: bold;
+}
+
+@keyframes ripple {
     from {
         opacity: 0.6;
         width: 1%;
-        height: 100px;
-    } 
+        height: 200%;
+    }
+
     to {
         opacity: 0.2;
         width: 130%;
         height: 300%;
     }
-} 
+}
 
 /* Angular Material SnackBar START */
 
 .mat-mdc-snack-bar-container {
     --mdc-snackbar-container-color: rgb(var(--primary-colour)) !important;
-    font-size: 24px !important;
+    font-size: 1.3rem !important;
 }
 
 .mdc-button .mdc-button__label {
-    font-size: 24px;
+    font-size: 1.3rem;
     font-weight: 800;
-    color: rgba(var(--highlight-colour), 0.4);    
+    color: rgba(var(--highlight-colour), 0.4);
 }
 
 .mdc-button .mdc-button__label:hover {
     color: rgba(var(--highlight-colour), 0.85);
 }
 
-.dialog-background .mdc-dialog__surface{
+.dialog-background .mdc-dialog__surface {
     border: 3px solid rgb(var(--highlight-colour));
-    border-radius: 20px;
+    border-radius: 1rem;
     background-color: rgb(var(--primary-colour)) !important;
 }
 
@@ -132,21 +149,41 @@ html {
 
 /* MEDIA QUERIES */
 
+@media only screen and (max-width: 1550px) {
+    html {
+        font-size: 17px;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 1050px) {
+    html {
+        font-size: 14px;
+    }
+}
+
 @media only screen and (max-width: 820px) {
 
     body {
         scroll-snap-type: none !important;
     }
 
-    html{
+    html {
         overflow-x: hidden;
+        font-size: 12px;
     }
 
-    :root{
-        --header-height: 65px;
+    :root {
+        --navbar-height: 65px;
     }
 
     .heading {
-        font-size: 32px;
+        font-size: 2.4em;
+        font-weight: bold;
     }
 }

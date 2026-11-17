@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Project } from '../models/project';
 
 @Injectable({

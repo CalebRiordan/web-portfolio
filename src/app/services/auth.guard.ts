@@ -1,4 +1,5 @@
 import { inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { SnackbarService } from './snackbar.service';
@@ -13,7 +14,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     return true;
   } else {
     router.navigate(['admin/login']);
-    sbService.generateSnackbar("Please log in before accessing the dashboard");
+    sbService.snackbar("Please log in before accessing the dashboard");
 
     return false;
   }
