@@ -47,10 +47,6 @@ Thumbs.db
 # Environment files
 src/app/environment.prod.ts
 
-# Angular component folders and services
-src/app/pages/dashboard/login
-src/app/services/auth.service.ts
-
 # Firebase files
 .firebase
 .firebaserc

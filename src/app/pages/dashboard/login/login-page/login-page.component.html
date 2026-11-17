@@ -1,0 +1,56 @@
+<div class="login-page">
+  <app-navbar [forPage]="'dashboard'"></app-navbar>
+  <div class="background-panel">
+    <div class="login-card">
+      <div class="heading">Login</div>
+      <div class="inner-card text-white">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="field-tag">Name</div>
+          <input
+            type="text"
+            class="field"
+            formControlName="name"
+            [ngClass]="{
+              'is-invalid':
+                (fc['name'].touched && fc['name'].invalid) || loginFailed
+            }"
+          />
+          <div
+            class="input-invalid"
+            *ngIf="fc['name'].errors?.['required'] && fc['name'].touched"
+          >
+            You name is required
+          </div>
+
+          <br /><br />
+
+          <div class="field-tag">Password</div>
+          <input
+            type="text"
+            class="field"
+            formControlName="password"
+            [ngClass]="{
+              'is-invalid':
+                (fc['password'].touched && fc['password'].invalid) ||
+                loginFailed
+            }"
+          />
+          <div
+            class="input-invalid"
+            *ngif="fc['password'].errors?.['required'] && fc['password'].touched"
+          >
+            your password is required
+          </div>
+
+          <div class="input-invalid credentials-invalid" *ngif="loginfailed">
+            incorrect username or password
+          </div>
+
+          <button class="button" [disabled]="loginForm.invalid" apprippleeffect>
+            submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
