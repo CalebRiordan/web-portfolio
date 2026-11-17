@@ -1,6 +1,6 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../environment.prod';
+import { environment } from '../environment';
 import { CreateMessageModel, Message } from '../models/message';
 import { Observable, catchError, throwError } from 'rxjs';
 

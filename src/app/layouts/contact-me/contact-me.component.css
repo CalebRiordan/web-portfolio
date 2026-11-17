@@ -155,6 +155,35 @@ form {
 
 /* MEDIA QUERIES */
 
+@media only screen and (max-width: 1600px){
+
+    .contact-me-card{
+        height: 650px;
+    }
+
+    .heading{
+        padding: 8px 0 16px 0;
+    }
+
+    .field-tag{
+        font-size: 32px;
+    }
+
+    .field{
+        height: 36px;
+        font-size: 18px;
+    }
+
+    .my-details{
+        font-size: 30px;
+    }
+
+    .inner-card .flex-col{
+        font-size: 22px;
+    }
+
+}
+
 @media only screen and (max-width: 1400px) {
 
     .my-details div {

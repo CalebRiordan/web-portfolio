@@ -7,7 +7,7 @@ import {
   map,
   throwError,
 } from 'rxjs';
-import { environment } from '../environment.prod';
+import { environment } from '../environment';
 
 @Injectable({
   providedIn: 'root',
